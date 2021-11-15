@@ -18,12 +18,12 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
     }
 
     @Override
-    public void borrar() {
-        super.borrar(); //To change body of generated methods, choose Tools | Templates.
+    public void eliminar() {
+        super.eliminar(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void borrar(int posicion) {
+    public void eliminar(int posicion) {
         tamaño--;
         Nodo nodoActual = primerNodo;
         

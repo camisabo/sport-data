@@ -32,13 +32,13 @@ public class pruebas <T> {
 //        lista.printLista();
 //        System.out.println(lista.buscar(0));
 //        System.out.println(lista.buscar(123));
-//        lista.borrar(5);
+//        lista.eliminar(5);
         System.out.println("-----------------------");
         lista.printLista();
-        lista.borrar(new Integer(52));
+        lista.eliminar(new Integer(52));
         System.out.println("-----------------------");
         lista.printLista();
-//        lista.borrar();
+//        lista.eliminar();
 //        System.out.println("-----------------------");
 //        lista.printLista();
         

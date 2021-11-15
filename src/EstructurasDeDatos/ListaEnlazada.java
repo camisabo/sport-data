@@ -134,7 +134,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
      * enlazada, se eliminara el dato mas cercano a esta
      * @param posicion Numero entero que determina la posicion a eliminar
      */
-    public void borrar (int posicion){
+    public void eliminar (int posicion){
         tamaño--;
         Nodo nodoActual = primerNodo;
         
@@ -175,7 +175,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
      * primero. en caso de no encontrarse el dato mandar aun mensaje por consola
      * @param datoABorrar Dato que se busca eliminar
      */
-    public void borrar (T datoABorrar){
+    public void eliminar (T datoABorrar){
         tamaño--;
         Nodo nodoActual = primerNodo;
         boolean estaElDato = buscar(datoABorrar);
@@ -205,7 +205,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
     /**
      * Elimina el ultimo dato añadido a la lista
      */
-    public void borrar (){
+    public void eliminar (){
         tamaño--;
         Nodo nodoActual = primerNodo;
         

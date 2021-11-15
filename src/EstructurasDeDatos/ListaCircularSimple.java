@@ -18,7 +18,7 @@ public class ListaCircularSimple<T extends Comparable<T>> extends ListaEnlazada<
     }
 
     @Override
-    public void borrar(T datoABorrar) {
+    public void eliminar(T datoABorrar) {
         tamaño--;
         Nodo nodoActual = primerNodo;
         boolean estaElDato = buscar(datoABorrar);
@@ -46,7 +46,7 @@ public class ListaCircularSimple<T extends Comparable<T>> extends ListaEnlazada<
     }
 
     @Override
-    public void borrar(int posicion) {
+    public void eliminar(int posicion) {
         
     }
 
