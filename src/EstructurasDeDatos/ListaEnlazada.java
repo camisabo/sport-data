@@ -141,6 +141,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
         //si hay solo un elemento
         if (nodoActual.getNodoSiguiente() == null){
             nodoActual.setDato(null);
+            tamaño = 0;
         }
         
         //si la posicion es menor que o igual a cero
@@ -180,11 +181,13 @@ public class ListaEnlazada <T extends Comparable<T>>{
         boolean estaElDato = buscar(datoABorrar);
         if (estaElDato == false){
             System.out.println("No se encuentra "+datoABorrar+" en "+this);
+            tamaño++;
         }
         
         //si hay solo un elemento y se encuentra el elemento
         else if (nodoActual.getNodoSiguiente() == null){
             nodoActual.setDato(null);
+            tamaño = 0;
         }
         
         
@@ -196,7 +199,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
             }
             else
                 nodoActual = nodoActual.getNodoSiguiente();
-        } while (true);
+        } while (estaElDato == true);
         
     }
     /**
@@ -209,6 +212,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
         //si hay solo un elemento
         if (nodoActual.getNodoSiguiente() == null){
             nodoActual.setDato(null);
+            tamaño = 0;
         }
         
         //en un caso normal
