@@ -33,6 +33,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
     }
     
     
+    
     //metodos
     /**
      * Imprime la lista con su posicion 
