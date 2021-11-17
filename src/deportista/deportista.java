@@ -5,121 +5,129 @@
  */
 package deportista;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 
 /**
  *
  * @author Omar Nicolas Guerrero
+ * @author SebastianCastro
  */
-public class deportista {
+public class Deportista {
     
     //atributos
-    private String [] TiposDeNiveles = new String[3]; 
-    private int Númerodeidentificación;
-    private String Nombre;
-    private String Club;
-    private char Sexo;
-    private String Nivel; // escuela, novatos, ligados
-    private LocalDate FechaDeNacimiento;
-    private LocalDate currentDate = LocalDate.of(2021,11,15);
+    private int númerodeidentificación;
+    private String nombre;
+    private String club;
+    private char sexo;
+    private String nivel; // escuela, novatos, ligados
+    private LocalDate fechaDeNacimiento;
+    private LocalDate CurrentDate = LocalDate.of(2021,11,15);
     
     //Categoria tipo String
-    public String Categoria; 
+    private String Categoria; 
     
     //contructor
-    public deportista(int Númerodeidentificación, String Nombre, String Club, 
-            char Sexo, String Nivel, LocalDate FechaDeNacimiento) {
-        this.Númerodeidentificación = Númerodeidentificación;
-        this.Nombre = Nombre;
-        this.Club = Club;
-        this.Sexo = Sexo;
-        this.Nivel = Nivel;
-        this.FechaDeNacimiento = FechaDeNacimiento;
-        this.Categoria = generarCategoria(FechaDeNacimiento, currentDate, Nivel);
+    public Deportista(int númerodeidentificación, String nombre, String club, 
+            char sexo, String nivel, LocalDate fechaDeNacimiento) {
+        this.númerodeidentificación = númerodeidentificación;
+        this.nombre = nombre;
+        this.club = club;
+        this.sexo = sexo;
+        this.nivel = nivel;
+        this.fechaDeNacimiento = fechaDeNacimiento;
+        this.Categoria = generarCategoria(fechaDeNacimiento, CurrentDate, nivel);
         
     }
     
 
     //getters y setters
-    public LocalDate getFechaDeNacimiento() {
-        return FechaDeNacimiento;
+    public LocalDate getfechaDeNacimiento() {
+        return fechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(LocalDate FechaDeNacimiento) {
-        this.FechaDeNacimiento = FechaDeNacimiento;
+    public void setfechaDeNacimiento(LocalDate fechaDeNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
-    public String[] getTiposDeNiveles() {
-        return TiposDeNiveles;
+    public int getnúmerodeidentificación() {
+        return númerodeidentificación;
     }
 
-    public void setTiposDeNiveles(String[] TiposDeNiveles) {
-        this.TiposDeNiveles = TiposDeNiveles;
+    public void setnúmerodeidentificación(int númerodeidentificación) {
+        this.númerodeidentificación = númerodeidentificación;
     }
 
-    public int getNúmerodeidentificación() {
-        return Númerodeidentificación;
+    public String getnombre() {
+        return nombre;
     }
 
-    public void setNúmerodeidentificación(int Númerodeidentificación) {
-        this.Númerodeidentificación = Númerodeidentificación;
+    public void setnombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getclub() {
+        return club;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setclub(String club) {
+        this.club = club;
     }
 
-    public String getClub() {
-        return Club;
+    public char getsexo() {
+        return sexo;
     }
 
-    public void setClub(String Club) {
-        this.Club = Club;
+    public void setsexo(char sexo) {
+        this.sexo = sexo;
     }
 
-    public char getSexo() {
-        return Sexo;
+    public String getnivel() {
+        return nivel;
     }
 
-    public void setSexo(char Sexo) {
-        this.Sexo = Sexo;
+    public void setnivel(String nivel) {
+        this.nivel = nivel;
+    }
+    
+    public String getCategoria() {
+        return Categoria;
     }
 
-    public String getNivel() {
-        return Nivel;
+    public void setCategoria(String Categoria) {
+        this.Categoria = Categoria;
     }
 
-    public void setNivel(String Nivel) {
-        this.Nivel = Nivel;
+    public LocalDate getCurrentDate() {
+        return CurrentDate;
     }
+
+    public void setCurrentDate(LocalDate CurrentDate) {
+        this.CurrentDate = CurrentDate;
+    }
+
     
     //metodos
 
     //Generar categoría
 
-    public String generarCategoria(LocalDate nacimiento, LocalDate currentDate, String Nivel) {
+    private String generarCategoria(LocalDate nacimiento, LocalDate CurrentDate, String nivel) {
 
-        int age = Period.between(nacimiento, currentDate).getYears();
+        int age = Period.between(nacimiento, CurrentDate).getYears();
         String categoria = "";
 
         if(age == 4) {
-            categoria = Nivel + " 4";
+            categoria = nivel + " 4";
         } else if (age == 5 || age == 6) {
-            categoria = Nivel + " 5-6";
+            categoria = nivel + " 5-6";
         } else if (age == 7 || age == 8) {
-            categoria = Nivel + " 7-8";
+            categoria = nivel + " 7-8";
         } else if (age == 9 || age == 10) {
-            categoria = Nivel + " 9-10";
+            categoria = nivel + " 9-10";
         } else if (age == 11 || age == 12) {
-            categoria = Nivel + " 11-12";
-        } else if (age >= 13 && Nivel != "ligados") { //Con niveles diferentes a ligados
-            categoria = "única " + Nivel; 
+            categoria = nivel + " 11-12";
+        } else if (age >= 13 && nivel != "ligados") { //Con niveles diferentes a ligados
+            categoria = "única " + nivel; 
         } 
 
         //Con ligados
@@ -137,8 +145,3 @@ public class deportista {
         }
 
     }
-
-    
-    
-    
-

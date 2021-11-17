@@ -17,14 +17,30 @@ public class Cola_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T>{
 
     // Metodos
 
+    /**
+     * Verifica si la cola esta vacia
+     * @return "true" si la cola esta vacia
+     */
+
+    @Override
     public boolean empty(){
         return cola == null;
     }
 
+    /**
+     * verifica si la cola esta llena
+     * @return "true" si la cola esta llena (en este caso no puede pasar)
+     */
+    @Override
     public boolean full(){
         return false;
     }
 
+    /**
+     * Coloca un dato, mediante un nodo, en la ultima posicion de la cola
+     * @param dato Dato a colocar en la cola
+     */
+    @Override
     public void insertar(T dato){
 
         Nodo<T> nuevo_nodo = new Nodo<T>(dato);
@@ -35,6 +51,11 @@ public class Cola_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T>{
         cola = nuevo_nodo;
     }
 
+    /**
+     * Elimina el primer dato de la cola
+     * @return el perimer dato de la cola
+     */
+    @Override
     public T eliminar(){
 
         T dato = null;

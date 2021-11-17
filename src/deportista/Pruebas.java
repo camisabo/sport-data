@@ -8,9 +8,9 @@ public class Pruebas {
 
         LocalDate FechaDeNacimiento = LocalDate.of(2005, 9, 23);
 
-        deportista dep_prueba = new deportista(1001299399, "Juan Sebastian Castro Pardo", "Racing Skate", 'V', "escuela", FechaDeNacimiento);
+        Deportista dep_prueba = new Deportista(1001299399, "Juan Sebastian Castro Pardo", "Racing Skate", 'V', "escuela", FechaDeNacimiento);
 
-        System.out.println(dep_prueba.Categoria);
+        System.out.println(dep_prueba.getCategoria());
         
     }
     
