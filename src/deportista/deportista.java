@@ -23,7 +23,7 @@ public class deportista {
     private char Sexo;
     private String Nivel;                                       // escuela, novatos, ligados
     private LocalDate FechaDeNacimiento;
-    private LocalDate refDate = LocalDate.of(2021,6,1);     //Fecha referencia para calcular la edad y al categoría
+    private LocalDate refDate = LocalDate.of(2021,6,1);         //Fecha referencia para calcular la edad y al categoría
     
     //Categoria tipo String
     public String Categoria; 
@@ -37,7 +37,7 @@ public class deportista {
         this.Sexo = Sexo;
         this.Nivel = Nivel;
         this.FechaDeNacimiento = FechaDeNacimiento;
-        this.Categoria = generarCategoria(FechaDeNacimiento, currentDate, Nivel);
+        this.Categoria = generarCategoria(FechaDeNacimiento, refDate, Nivel);
         
     }
     
