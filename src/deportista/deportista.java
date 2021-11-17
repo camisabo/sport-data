@@ -21,9 +21,9 @@ public class deportista {
     private String Nombre;
     private String Club;
     private char Sexo;
-    private String Nivel; // escuela, novatos, ligados
+    private String Nivel;                                       // escuela, novatos, ligados
     private LocalDate FechaDeNacimiento;
-    private LocalDate currentDate = LocalDate.of(2021,11,15);
+    private LocalDate refDate = LocalDate.of(2021,6,1);     //Fecha referencia para calcular la edad y al categoría
     
     //Categoria tipo String
     public String Categoria; 
@@ -105,7 +105,7 @@ public class deportista {
 
     public String generarCategoria(LocalDate nacimiento, LocalDate currentDate, String Nivel) {
 
-        int age = Period.between(nacimiento, currentDate).getYears();
+        int age = Period.between(nacimiento, refDate).getYears();    //Edad calculada con la fecha referencia
         String categoria = "";
 
         if(age == 4) {
