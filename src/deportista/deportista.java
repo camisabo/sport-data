@@ -6,6 +6,8 @@
 package deportista;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Period;
 
 /**
  *
@@ -19,32 +21,33 @@ public class deportista {
     private String Nombre;
     private String Club;
     private char Sexo;
-    private char Nivel;
-    private Date FechaDeNacimiento;
+    private String Nivel; // escuela, novatos, ligados
+    private LocalDate FechaDeNacimiento;
+    private LocalDate currentDate = LocalDate.of(2021,11,15);
     
-    //no se que tipo de dato es la categoria asi que lo dejo en tipo object
-    private Object Categoria; 
+    //Categoria tipo String
+    public String Categoria; 
     
     //contructor
     public deportista(int Númerodeidentificación, String Nombre, String Club, 
-            char Sexo, char Nivel, Date FechaDeNacimiento) {
+            char Sexo, String Nivel, LocalDate FechaDeNacimiento) {
         this.Númerodeidentificación = Númerodeidentificación;
         this.Nombre = Nombre;
         this.Club = Club;
         this.Sexo = Sexo;
         this.Nivel = Nivel;
         this.FechaDeNacimiento = FechaDeNacimiento;
-        //aqui se calcula o se espesifica la categoria;
-        Categoria = new Object();
+        this.Categoria = generarCategoria(FechaDeNacimiento, currentDate, Nivel);
         
     }
     
+
     //getters y setters
-    public Date getFechaDeNacimiento() {
+    public LocalDate getFechaDeNacimiento() {
         return FechaDeNacimiento;
     }
 
-    public void setFechaDeNacimiento(Date FechaDeNacimiento) {
+    public void setFechaDeNacimiento(LocalDate FechaDeNacimiento) {
         this.FechaDeNacimiento = FechaDeNacimiento;
     }
 
@@ -88,16 +91,54 @@ public class deportista {
         this.Sexo = Sexo;
     }
 
-    public char getNivel() {
+    public String getNivel() {
         return Nivel;
     }
 
-    public void setNivel(char Nivel) {
+    public void setNivel(String Nivel) {
         this.Nivel = Nivel;
     }
     
     //metodos
+
+    //Generar categoría
+
+    public String generarCategoria(LocalDate nacimiento, LocalDate currentDate, String Nivel) {
+
+        int age = Period.between(nacimiento, currentDate).getYears();
+        String categoria = "";
+
+        if(age == 4) {
+            categoria = Nivel + " 4";
+        } else if (age == 5 || age == 6) {
+            categoria = Nivel + " 5-6";
+        } else if (age == 7 || age == 8) {
+            categoria = Nivel + " 7-8";
+        } else if (age == 9 || age == 10) {
+            categoria = Nivel + " 9-10";
+        } else if (age == 11 || age == 12) {
+            categoria = Nivel + " 11-12";
+        } else if (age >= 13 && Nivel != "ligados") { //Con niveles diferentes a ligados
+            categoria = "única " + Nivel; 
+        } 
+
+        //Con ligados
+
+        else if (age == 14) {
+            categoria = "prejuvenil";
+        } else if (age == 15 || age == 16) {
+            categoria = "juvenil"; 
+        } else if (age >= 17) {
+            categoria = "mayores";
+        }
+
+        return categoria;
+
+        }
+
+    }
+
     
     
     
-}
+
