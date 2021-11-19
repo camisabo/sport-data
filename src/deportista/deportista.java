@@ -7,6 +7,8 @@ package deportista;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -16,26 +18,53 @@ import java.time.Period;
 public class deportista {
     
     //atributos
-    private int númerodeidentificación;
-    private String nombre;
-    private String club;
-    private char sexo;
-    private String nivel;                                       // escuela, novatos, ligados
-    private LocalDate fechaDeNacimiento;
+    public String númerodeidentificación;
+    public String nombre;
+    public String club;
+    public String sexo;
+    public String nivel;                                       // escuela, novatos, ligados
+    public LocalDate fechaDeNacimiento;
     private LocalDate refDate = LocalDate.of(2021,6,1);         //Fecha referencia para calcular la edad y al categoría
     
     //Categoria tipo String
-    private String Categoria; 
+    public String Categoria; 
     
     //contructor
-    public deportista(int númerodeidentificación, String nombre, String club, 
-            char sexo, String nivel, LocalDate fechaDeNacimiento) {
-        this.númerodeidentificación = númerodeidentificación;
-        this.nombre = nombre;
-        this.club = club;
-        this.sexo = sexo;
-        this.nivel = nivel;
-        this.fechaDeNacimiento = fechaDeNacimiento;
+    public deportista(String[] datos) {
+        this.númerodeidentificación = datos[0];
+        
+        this.nombre = "";
+
+        Pattern pattern = Pattern.compile("[0-9]");
+        Matcher matcher;
+        boolean matchFound;
+        int n = 0;
+        int[] fechaNacimiento = new int[3];
+        
+        for (int i = 1; i < datos.length; i++) {
+            matcher = pattern.matcher(datos[i]);
+            matchFound = matcher.find();
+            if(matchFound) {
+                fechaNacimiento[0] = Integer.parseInt(datos[i]);
+                fechaNacimiento[1] = Integer.parseInt(datos[i+1]);
+                fechaNacimiento[2] = Integer.parseInt(datos[i+2]);
+                n = i + 3;
+                i = datos.length;
+            } else {
+                this.nombre += " " + datos[i];
+            }
+        }
+
+        this.fechaDeNacimiento = LocalDate.of(fechaNacimiento[0], fechaNacimiento[1], fechaNacimiento[2]);
+
+        this.sexo = datos[n];
+        this.nivel = datos[n+1];
+        this.club = "";
+
+        for (int x = n+2; x < datos.length; x++) {
+            this.club += " " + datos[x];
+        }
+
         this.Categoria = generarCategoria(fechaDeNacimiento, refDate, nivel);
     }
     
@@ -49,11 +78,11 @@ public class deportista {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
-    public int getnúmerodeidentificación() {
+    public String getnúmerodeidentificación() {
         return númerodeidentificación;
     }
 
-    public void setnúmerodeidentificación(int númerodeidentificación) {
+    public void setnúmerodeidentificación(String númerodeidentificación) {
         this.númerodeidentificación = númerodeidentificación;
     }
 
@@ -73,11 +102,11 @@ public class deportista {
         this.club = club;
     }
 
-    public char getsexo() {
+    public String getsexo() {
         return sexo;
     }
 
-    public void setsexo(char sexo) {
+    public void setsexo(String sexo) {
         this.sexo = sexo;
     }
 

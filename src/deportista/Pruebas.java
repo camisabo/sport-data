@@ -1,16 +1,37 @@
 package deportista;
 
-import java.time.LocalDate;
+import java.io.*;
 
 public class Pruebas {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
 
-        LocalDate FechaDeNacimiento = LocalDate.of(2005, 9, 23);
 
-        Deportista dep_prueba = new Deportista(1001299399, "Juan Sebastian Castro Pardo", "Racing Skate", 'V', "escuela", FechaDeNacimiento);
+        FileReader fileReader;
+        BufferedReader bufferedReader;
 
-        System.out.println(dep_prueba.getCategoria());
+        try {
+
+            File dataFile = new File("data.txt");
+            fileReader = new FileReader(dataFile);
+            bufferedReader = new BufferedReader(fileReader);
+            String currentLine = bufferedReader.readLine();
+            while(currentLine != null){
+                String dataLine = currentLine.replace('-', ' ');
+                String[] DataArray = dataLine.split(" ");
+
+                deportista dep_1 = new deportista(DataArray);
+                
+                currentLine = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+            fileReader.close();
+            
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+
         
     }
     
