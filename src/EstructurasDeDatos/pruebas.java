@@ -11,7 +11,7 @@ package EstructurasDeDatos;
  * @author Omar Nicolas Guerrero
  * @param <T>
  */
-public class Pruebas <T> {
+public class pruebas <T> {
 
     /**
      * @param args the command line arguments

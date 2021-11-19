@@ -101,12 +101,12 @@ public class ListaEnlazada <T extends Comparable<T>>{
         
         //en un caso normal
         else{
-            for(int i = 0; i< posicion-1;i++){ /*pocicionar un apuntador al dato
+            for(int i = 0; i< posicion-1;i++){ /*posicionar un apuntador al dato
                                               anterior a la pocicion a insertar
                                             */ 
                 nodoActual = nodoActual.getNodoSiguiente();
                 if (nodoActual.getNodoSiguiente() == null){/*verifica que la 
-                                                           pocicion exista
+                                                           posicion exista
                                                            */
                     insertar(nuevoDato);
                 }

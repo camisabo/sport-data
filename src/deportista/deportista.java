@@ -13,7 +13,7 @@ import java.time.Period;
  * @author Omar Nicolas Guerrero
  * @author SebastianCastro
  */
-public class Deportista {
+public class deportista {
     
     //atributos
     private int númerodeidentificación;
@@ -28,7 +28,7 @@ public class Deportista {
     private String Categoria; 
     
     //contructor
-    public Deportista(int númerodeidentificación, String nombre, String club, 
+    public deportista(int númerodeidentificación, String nombre, String club, 
             char sexo, String nivel, LocalDate fechaDeNacimiento) {
         this.númerodeidentificación = númerodeidentificación;
         this.nombre = nombre;
