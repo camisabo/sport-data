@@ -106,6 +106,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
         
         //si hay solo un elemento
         if (nodoActual.getNodoSiguiente() == null){
+            tamaño--;
             insertar(nuevoDato);
         }
         
@@ -125,6 +126,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
                                                            posicion exista
                                                            */
                     insertar(nuevoDato);
+                    tamaño--;
                 }
             }
             nuevoNodo.setNodoSiguiente(nodoActual.getNodoSiguiente());
@@ -170,7 +172,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
         
         //en un caso normal
         else{
-            for(int i = 0; i< posicion-1;i++){ /*pocicionar un apuntador al dato
+            for(int i = 0; i< posicion-1;i++){ /*posicionar un apuntador al dato
                                               anterior a la pocicion a insertar
                                             */ 
                 nodoActual = nodoActual.getNodoSiguiente();
@@ -183,8 +185,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
             }
             
             //se quita la referencia al nodo seleccionado
-            nodoActual.setNodoSiguiente((nodoActual.getNodoSiguiente())
-                    .getNodoSiguiente());
+            nodoActual.setNodoSiguiente((nodoActual.getNodoSiguiente()).getNodoSiguiente());
         }   
     }
     /**

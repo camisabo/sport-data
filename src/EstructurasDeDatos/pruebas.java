@@ -18,7 +18,6 @@ public class pruebas <T> {
      */
     public static void main(String[] args) {
         
-        ListaEnlazada<Integer> lista = new ListaEnlazada(12);
 //        
 //        lista.insertar(34);
 //        lista.insertar(334);
@@ -49,6 +48,18 @@ public class pruebas <T> {
         lista2.insertar(16);
         lista2.printLista();
         
+        lista2.eliminar();
+        lista2.printLista();
+        lista2.insertar(16);
+        lista2.eliminar(2);
+        lista2.printLista();
+        
+        lista2.insertar(133, 3);
+        lista2.printLista();
+        lista2.insertar(166, 2);
+        lista2.printLista();
+        System.out.println(lista2.buscar(0));
+
     }
     
 }
