@@ -41,12 +41,10 @@ public class pruebas <T> {
 ////        System.out.println("-----------------------");
 ////        lista.printLista();
         
-        /*ListaEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<>(12);
+        ListaDoblementeEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<>(12);
         lista2.insertar(13);
-        lista2.printLista();
         lista2.insertar(11, 0);
-        System.out.println();
-        lista2.printLista();*/
+        System.out.println(lista2.buscarPos(1));
 
     }
     

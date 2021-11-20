@@ -3,8 +3,8 @@ package deportista;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.Scanner;
-import java.util.prefs.BackingStoreException;
 
+import EstructurasDeDatos.ListaDoblementeEnlazada;
 import EstructurasDeDatos.ListaEnlazada;
 
 public class Pruebas {
@@ -106,7 +106,7 @@ public class Pruebas {
         FileReader fileReader;
         BufferedReader bufferedReader;
 
-        ListaEnlazada<deportista> lista_deportistas = new ListaEnlazada<deportista>(null);
+        ListaDoblementeEnlazada<deportista> lista_deportistas = new ListaDoblementeEnlazada<deportista>(null); 
 
 
         //Ingreso todos los deportistas del txt a una lista
