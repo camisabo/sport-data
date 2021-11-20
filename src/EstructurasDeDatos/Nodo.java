@@ -11,10 +11,10 @@ package EstructurasDeDatos;
  * @param <T> es un dato abstracto que admite cualquier tipo de dato
  * 
  */
-class Nodo <T extends Comparable> {
+public class Nodo <T extends Comparable<T>> {
     private Nodo <T> NodoSiguiente;
     private Nodo <T> NodoAnterior;
-    private T dato;
+    public T dato;
     
     //contructor
     public Nodo(T dato){
@@ -43,7 +43,7 @@ class Nodo <T extends Comparable> {
      * 
      * @return El dato almacenado en el nodo.
      */    
-    T getDato() {
+    public T getDato() {
         return dato;
     }
 
@@ -70,7 +70,7 @@ class Nodo <T extends Comparable> {
      * 
      * @param dato Dato (del mismo tipo) por el que se va a cambiar el dato actual
      */
-    void setDato(T dato) {
+    public void setDato(T dato) {
         this.dato = dato;
     }
 

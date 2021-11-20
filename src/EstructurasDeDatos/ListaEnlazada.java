@@ -13,14 +13,14 @@ package EstructurasDeDatos;
  */
 public class ListaEnlazada <T extends Comparable<T>>{
     //atributos
-    Nodo<T> primerNodo;
+    public Nodo<T> primerNodo;
     private T dato;
     protected int tamaño = 0;
     
     //constructor
     
     public ListaEnlazada(T dato) {
-        this.primerNodo = new Nodo(dato);
+        this.primerNodo = new Nodo<>(dato);
     }
 
     //getters and setters
@@ -39,7 +39,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
      * Imprime la lista con su posicion 
      */
     public void printLista (){
-        Nodo nodoActual = primerNodo;
+        Nodo<T> nodoActual = primerNodo;
         int contador  = 0;   
         
         for (int i = 0;tamaño+1>i;i++){
@@ -59,7 +59,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
      * contrario
      */
     public boolean buscar (T datoABuscar){
-        Nodo nodoActual = primerNodo;
+        Nodo<T> nodoActual = primerNodo;
         
         do {            
             if (nodoActual.getDato().compareTo(datoABuscar) == 0){
@@ -73,6 +73,23 @@ public class ListaEnlazada <T extends Comparable<T>>{
         } while (true);
         
     }
+
+    public T buscar (int posicion) {
+        Nodo<T> nodoActual = primerNodo;
+
+        for (int i = 0; i <= this.tamaño; i++) {
+
+            if (i == posicion) {
+                return nodoActual.getDato();
+            } else {
+                nodoActual = nodoActual.getNodoSiguiente();
+            }
+            
+        }
+
+        return null;
+    }
+
     /**
      * Coloca un dato, mediante un nodo, en la posicion dada dentro de la lista
      * enlazada (comenzando desde 0), si la posicion se exede, se colocara el
@@ -84,9 +101,8 @@ public class ListaEnlazada <T extends Comparable<T>>{
      */
     public void insertar (T nuevoDato, int posicion){
         tamaño++;
-        System.out.println(tamaño);
-        Nodo nodoActual = primerNodo;
-        Nodo nuevoNodo = new Nodo(nuevoDato);
+        Nodo<T> nodoActual = primerNodo;
+        Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);
         
         //si hay solo un elemento
         if (nodoActual.getNodoSiguiente() == null){
@@ -121,8 +137,8 @@ public class ListaEnlazada <T extends Comparable<T>>{
      */
     public void insertar (T nuevoDato){
         tamaño++;
-        Nodo nodoActual = primerNodo;
-        Nodo nuevoNodo = new Nodo(nuevoDato);
+        Nodo<T> nodoActual = primerNodo;
+        Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);
         
         while (nodoActual.getNodoSiguiente() != null){
             nodoActual= nodoActual.getNodoSiguiente();
@@ -137,7 +153,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
      */
     public void eliminar (int posicion){
         tamaño--;
-        Nodo nodoActual = primerNodo;
+        Nodo<T> nodoActual = primerNodo;
         
         //si hay solo un elemento
         if (nodoActual.getNodoSiguiente() == null){
@@ -178,7 +194,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
      */
     public void eliminar (T datoABorrar){
         tamaño--;
-        Nodo nodoActual = primerNodo;
+        Nodo<T> nodoActual = primerNodo;
         boolean estaElDato = buscar(datoABorrar);
         if (estaElDato == false){
             System.out.println("No se encuentra "+datoABorrar+" en "+this);
@@ -208,7 +224,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
      */
     public void eliminar (){
         tamaño--;
-        Nodo nodoActual = primerNodo;
+        Nodo<T> nodoActual = primerNodo;
         
         //si hay solo un elemento
         if (nodoActual.getNodoSiguiente() == null){

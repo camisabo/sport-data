@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * @author Omar Nicolas Guerrero
  * @author SebastianCastro
  */
-public class deportista {
+public class deportista implements Comparable<deportista> {
     
     //atributos
     public String númerodeidentificación;
@@ -165,5 +165,15 @@ public class deportista {
         return categoria;
 
         }
+
+
+    @Override
+    public int compareTo(deportista d) {
+        if(this.númerodeidentificación == d.númerodeidentificación || this.nombre == d.nombre) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 
     }
