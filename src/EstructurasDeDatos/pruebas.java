@@ -41,12 +41,19 @@ public class pruebas <T> {
 ////        System.out.println("-----------------------");
 ////        lista.printLista();
         
-        ListaDoblementeEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<>(12);
+        /*ListaEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<>(12);
         lista2.insertar(13);
-        lista2.insertar(14);
-        lista2.insertar(15);
-        lista2.insertar(16);
         lista2.printLista();
+        lista2.insertar(11, 0);
+        System.out.println();
+        lista2.printLista();*/
+
+        String a = "1001299399";
+        String b = "1001299399";
+
+        System.out.println(a.compareTo(b));
+
+        
         
         lista2.eliminar();
         lista2.printLista();

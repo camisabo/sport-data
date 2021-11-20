@@ -5,6 +5,8 @@
  */
 package EstructurasDeDatos;
 
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
+
 /**
  *
  * 
@@ -15,7 +17,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
     //atributos
     public Nodo<T> primerNodo;
     private T dato;
-    protected int tamaño = 0;
+    public int tamaño = 0;
     
     //constructor
     
@@ -71,9 +73,25 @@ public class ListaEnlazada <T extends Comparable<T>>{
             else
                 nodoActual = nodoActual.getNodoSiguiente();
         } while (true);
-        
+
     }
 
+    public int buscarPos (T datoABuscar) {
+        Nodo<T> nodoActual = primerNodo;
+        int posicion = 0;
+
+        while (posicion <= this.tamaño){
+            if(nodoActual.getDato().compareTo(datoABuscar) == 0){
+                return posicion;
+            } else {
+                nodoActual = nodoActual.getNodoSiguiente();
+            }
+        }
+        return -1;
+    }
+
+
+    //Buscar el elemento en la posición dada
     public T buscar (int posicion) {
         Nodo<T> nodoActual = primerNodo;
 

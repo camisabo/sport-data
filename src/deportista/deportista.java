@@ -31,41 +31,54 @@ public class deportista implements Comparable<deportista> {
     
     //contructor
     public deportista(String[] datos) {
-        this.númerodeidentificación = datos[0];
-        
-        this.nombre = "";
 
-        Pattern pattern = Pattern.compile("[0-9]");
-        Matcher matcher;
-        boolean matchFound;
-        int n = 0;
-        int[] fechaNacimiento = new int[3];
+        if(datos.length == 2){ //Para la busqueda por nombre o por documento
+            this.númerodeidentificación = datos[0];
+            this.nombre = datos[1];
+            this.fechaDeNacimiento = null;
+            this.sexo = null;
+            this.nivel = null;
+            this.club = null;
+        } else { // en caso normal
+
+            this.númerodeidentificación = datos[0];
         
-        for (int i = 1; i < datos.length; i++) {
-            matcher = pattern.matcher(datos[i]);
-            matchFound = matcher.find();
-            if(matchFound) {
-                fechaNacimiento[0] = Integer.parseInt(datos[i]);
-                fechaNacimiento[1] = Integer.parseInt(datos[i+1]);
-                fechaNacimiento[2] = Integer.parseInt(datos[i+2]);
-                n = i + 3;
-                i = datos.length;
-            } else {
-                this.nombre += " " + datos[i];
+            String aux_nombre = "";
+
+            Pattern pattern = Pattern.compile("[0-9]");
+            Matcher matcher;
+            boolean matchFound;
+            int n = 0;
+            int[] fechaNacimiento = new int[3];
+        
+            for (int i = 1; i < datos.length; i++) {
+                matcher = pattern.matcher(datos[i]);
+                matchFound = matcher.find();
+                if(matchFound) {
+                    fechaNacimiento[0] = Integer.parseInt(datos[i]);
+                    fechaNacimiento[1] = Integer.parseInt(datos[i+1]);
+                    fechaNacimiento[2] = Integer.parseInt(datos[i+2]);
+                    n = i + 3;
+                    i = datos.length;
+                } else {
+                    aux_nombre += datos[i] + " ";
+                }
             }
+
+            this.nombre = aux_nombre.replaceFirst("\\s++$", "");
+
+            this.fechaDeNacimiento = LocalDate.of(fechaNacimiento[0], fechaNacimiento[1], fechaNacimiento[2]);
+
+            this.sexo = datos[n];
+            this.nivel = datos[n+1];
+            this.club = "";
+
+            for (int x = n+2; x < datos.length; x++) {
+                this.club += datos[x] + " ";
+            }
+
+            this.Categoria = generarCategoria(fechaDeNacimiento, refDate, nivel);
         }
-
-        this.fechaDeNacimiento = LocalDate.of(fechaNacimiento[0], fechaNacimiento[1], fechaNacimiento[2]);
-
-        this.sexo = datos[n];
-        this.nivel = datos[n+1];
-        this.club = "";
-
-        for (int x = n+2; x < datos.length; x++) {
-            this.club += " " + datos[x];
-        }
-
-        this.Categoria = generarCategoria(fechaDeNacimiento, refDate, nivel);
     }
     
 
@@ -169,7 +182,9 @@ public class deportista implements Comparable<deportista> {
 
     @Override
     public int compareTo(deportista d) {
-        if(this.númerodeidentificación == d.númerodeidentificación || this.nombre == d.nombre) {
+        if(this.númerodeidentificación.compareTo(d.númerodeidentificación) == 0) {
+            return 0;
+        } else if (this.nombre.compareTo(d.nombre) == 0) {
             return 0;
         } else {
             return 1;
