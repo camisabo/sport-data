@@ -63,7 +63,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
     public boolean buscar (T datoABuscar){
         Nodo<T> nodoActual = primerNodo;
         
-        do {            
+        do {         
             if (nodoActual.getDato().compareTo(datoABuscar) == 0){
                 return true;
             }
@@ -85,6 +85,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
                 return posicion;
             } else {
                 nodoActual = nodoActual.getNodoSiguiente();
+                posicion ++;
             }
         }
         return -1;
@@ -123,7 +124,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
         Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);
         
         //si hay solo un elemento
-        if (nodoActual.getNodoSiguiente() == null){
+        if (nodoActual.getNodoSiguiente() == null && posicion != 0){
             tamaño--;
             insertar(nuevoDato);
         }

@@ -1,7 +1,9 @@
 package deportista;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.prefs.BackingStoreException;
 
 import EstructurasDeDatos.ListaEnlazada;
 
@@ -11,7 +13,7 @@ public class Pruebas {
 
     //1. CREAR DEPORTISTA
 
-    public static String CrearDeportista(String datos, ListaEnlazada<deportista> lista_deportistas) {
+    public static void CrearDeportista(String datos, ListaEnlazada<deportista> lista_deportistas) {
 
         String aux_str = datos.replace('-', ' ');
         String[] datos_new_dep = aux_str.split(" ");
@@ -19,7 +21,10 @@ public class Pruebas {
         deportista new_dep = new deportista(datos_new_dep);
         lista_deportistas.insertar(new_dep);
 
-        
+    }
+
+    //ACTUALIZAR TXT
+    public static String Actualizar_txt (ListaEnlazada<deportista> lista_deportistas) {
         String dep_txt_str = "";
 
         for (int i = 0; i <= lista_deportistas.tamaño; i++) {
@@ -32,7 +37,6 @@ public class Pruebas {
         }
 
         return dep_txt_str;
-
     }
 
     // 2. BUSCAR DEPORTISTA
@@ -48,6 +52,51 @@ public class Pruebas {
         } else {
             System.out.println("No se encontro ningún deportista con ese nombre o número de identificación");
         }
+
+    }
+
+    // 3. ACTUALIZAR DEPORTISTA
+
+    public static deportista ActualizarDeportista (deportista dep_actualizar, String dato_actualizado, int dato_cambiar, ListaEnlazada<deportista> lista_deportistas) {
+
+        int[] fecha_num = new int[3];
+
+        //Buscamos el deportista y le cambiamos el dato
+        int posicion = lista_deportistas.buscarPos(dep_actualizar);
+        deportista dep_act = lista_deportistas.buscar(posicion);
+        System.out.println(posicion);
+        
+        switch (dato_cambiar) {
+            case 1: 
+                dep_act.setnúmerodeidentificación(dato_actualizado);
+                break;
+            case 2:
+                dep_act.setnombre(dato_actualizado);
+                break;
+            case 3:
+                String[] nacimiento = dato_actualizado.split("-");
+                for(int i = 0; i < 3; i++) {
+                    fecha_num[i] = Integer.parseInt(nacimiento[i]);
+                }
+                dep_act.setfechaDeNacimiento(LocalDate.of(fecha_num[0], fecha_num[1], fecha_num[2]));
+                break;
+            case 4:
+                dep_act.setsexo(dato_actualizado);
+                break;
+            case 5:
+                dep_act.setnivel(dato_actualizado);
+                break;
+            case 6:
+                dep_act.setclub(dato_actualizado);
+            default:
+                break;
+        }
+
+        //Ingresamos el deportista actualizado a la lista
+        lista_deportistas.eliminar(posicion);
+        lista_deportistas.insertar(dep_act, posicion);
+
+        return dep_act;
 
     }
 
@@ -119,11 +168,13 @@ public class Pruebas {
                     datos += sc.nextLine() + " ";
                 }
 
-                FileWriter myWriter = new FileWriter("data.txt");
-
                 //Llamamos la función
-                String dep_txt_str = CrearDeportista(datos, lista_deportistas);
+                CrearDeportista(datos, lista_deportistas);
 
+                //Actualizamos txt
+
+                FileWriter myWriter = new FileWriter("data.txt");
+                String dep_txt_str = Actualizar_txt(lista_deportistas);
                 myWriter.write(dep_txt_str);
                 myWriter.close();
 
@@ -168,23 +219,144 @@ public class Pruebas {
             if(sc_2.hasNextInt()) {
                 dep_actualizar_str[0] = sc_2.nextLine();
                 dep_actualizar_str[1] = "";
-                dep_buscar = new deportista(dep_actualizar_str);
+                dep_actualizar = new deportista(dep_actualizar_str);
             } else {
                 dep_actualizar_str[1] = sc_2.nextLine();
                 dep_actualizar_str[0] = "";
-                dep_buscar = new deportista(dep_actualizar_str);
+                dep_actualizar = new deportista(dep_actualizar_str);
             }
 
             //Llamamos la función búscar
-            BuscarDeportista(dep_buscar, lista_deportistas);
+            BuscarDeportista(dep_actualizar, lista_deportistas);
 
             while (seguir_actualizando) {
 
                 System.out.println();
-                System.out.println("¿Que dato desea actualziar?:\n1. Número de identificación\n2. Nombre\n3. Fecha de nacimiento\n4. Sexo\n5. nivel \n6. Club");
+                System.out.println("¿Que dato desea actualzar?:\n1. Número de identificación\n2. Nombre\n3. Fecha de nacimiento\n4. Sexo\n5. nivel \n6. Club");
+                Scanner sc_3 = new Scanner(System.in);
+                int dato_cambiar = sc_3.nextInt();
+                String dato_actualizado = "";
 
-            }
+                FileWriter myWriter_1 = new FileWriter("data.txt");
+                deportista dep_actualizado;
+                String dep_act_str;
 
+                String dato_cambiar_str = "";
+
+                switch (dato_cambiar) {
+                    case 1:
+                        dato_cambiar_str = "el neuvo número de identificación";
+                        break;
+                    case 2:
+                        dato_cambiar_str = "el nuevo nombre";
+                        break;
+                    case 3:
+                        dato_cambiar_str = "la nueva fecha de nacimiento";
+                        break;
+                    case 4:
+                        dato_cambiar_str = "el sexo que le asignará al deportista (M,F)";
+                        break;
+                    case 5:
+                        dato_cambiar_str = "el nivel al que desea cambiar al deportista";
+                        break;
+                    case 6:
+                        dato_cambiar_str = "el nuevo club";
+                    default:
+                        break;
+                }
+
+                System.out.println();
+                System.out.println("Digite " + dato_cambiar_str); 
+
+                //Recibimos el nuevo dato
+                boolean EmptyLine = false;
+                while(!EmptyLine) {
+                    if(sc_3.nextLine().compareTo("") == 0){
+                        EmptyLine = true;
+                    }
+                }
+                dato_actualizado = sc_3.nextLine();
+
+                //Actualizamos deportista
+                dep_actualizado = ActualizarDeportista(dep_actualizar, dato_actualizado, dato_cambiar, lista_deportistas);
+
+                //Actualizamos txt
+                dep_act_str = Actualizar_txt(lista_deportistas);
+                myWriter_1.write(dep_act_str);
+                myWriter_1.close();
+
+                //Imprimimos deportista actualziado
+
+                System.out.println();
+                System.out.println("Se ha actualizado el deportista exitosamente!");
+                System.out.println();
+                BuscarDeportista(dep_actualizado, lista_deportistas);
+
+                sc_3.close();
+                seguir_actualizando = false;
+  
+                }
+                
+                break;
+
+            case 4: //Eliminar un deportista
+
+                System.out.println();
+                System.out.println("Digite el número de identidad o el nombre completo del deportista que quiere borrar");
+
+                Scanner sc_4 = new Scanner(System.in);
+                deportista dep_borrar;
+                String[] dep_borrar_str = new String[2];;
+
+                FileWriter myWriter_2 = new FileWriter("data.txt");
+                String borrar_act_str = "";
+
+                //Creamos un deportista con el dato dado
+                if(sc_4.hasNextInt()) {
+                    dep_borrar_str[0] = sc_4.nextLine();
+                    dep_borrar_str[1] = "";
+                    dep_borrar = new deportista(dep_borrar_str);
+                } else {
+                    dep_borrar_str[1] = sc_4.nextLine();
+                    dep_borrar_str[0] = "";
+                    dep_borrar = new deportista(dep_borrar_str);
+                }
+
+                //Llamamos la función búscar
+                BuscarDeportista(dep_borrar, lista_deportistas);
+
+                //Preguntamos si quiere eliminar este deportista
+
+                System.out.println();
+                System.out.println("¿Esta seguro de que quiere eliminar este deportista? \n0. Si\n1. No");
+                int decision = sc_4.nextInt();
+
+                if(decision == 1) {
+                    break;
+                } else if(decision == 0) {
+
+                    int pos = lista_deportistas.buscarPos(dep_borrar);
+                    if(pos == lista_deportistas.tamaño) {
+                        lista_deportistas.eliminar();
+                    } else {
+                        lista_deportistas.eliminar(dep_borrar);
+                    }
+
+                    //Actualizamos txt
+
+                    borrar_act_str = Actualizar_txt(lista_deportistas);
+                    myWriter_2.write(borrar_act_str);
+                    myWriter_2.close();
+
+
+                    System.out.println();
+                    System.out.println("Deportista eliminado exitosamente!");
+
+                    break;
+
+                }
+
+                break;
 
             default:
                 break;

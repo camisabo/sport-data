@@ -48,25 +48,6 @@ public class pruebas <T> {
         System.out.println();
         lista2.printLista();*/
 
-        String a = "1001299399";
-        String b = "1001299399";
-
-        System.out.println(a.compareTo(b));
-
-        
-        
-        lista2.eliminar();
-        lista2.printLista();
-        lista2.insertar(16);
-        lista2.eliminar(2);
-        lista2.printLista();
-        
-        lista2.insertar(133, 3);
-        lista2.printLista();
-        lista2.insertar(166, 2);
-        lista2.printLista();
-        System.out.println(lista2.buscar(0));
-
     }
     
 }

@@ -112,7 +112,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
         Nodo<T> nodoActual = primerNodo;
         Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);
         //si hay solo un elemento
-        if (nodoActual.getNodoSiguiente() == null){
+        if (nodoActual.getNodoSiguiente() == null && posicion != 0){
             insertar(nuevoDato);
             tamaño--;
         }
