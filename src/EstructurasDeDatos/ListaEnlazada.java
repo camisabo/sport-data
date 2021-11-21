@@ -19,8 +19,12 @@ public class ListaEnlazada <T extends Comparable<T>>{
     private T dato;
     public int tamaño = 0;
     
-    //constructor
-    
+    //constructores
+
+    public ListaEnlazada(){
+        this.primerNodo = null;
+    }
+
     public ListaEnlazada(T dato) {
         this.primerNodo = new Nodo<>(dato);
     }
@@ -157,15 +161,26 @@ public class ListaEnlazada <T extends Comparable<T>>{
      * @param nuevoDato Dato a colocar en la lista enlazada
      */
     public void insertar (T nuevoDato){
+
         tamaño++;
-        Nodo<T> nodoActual = primerNodo;
-        Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);
-        
-        while (nodoActual.getNodoSiguiente() != null){
-            nodoActual= nodoActual.getNodoSiguiente();
+
+        if(primerNodo.getDato() == null){
+
+            Nodo<T> new_node = new Nodo<T>(nuevoDato);
+            primerNodo = new_node;
         }
         
-        nodoActual.setNodoSiguiente(nuevoNodo);
+        else{
+            
+            Nodo<T> nodoActual = primerNodo;
+            Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);
+        
+            while (nodoActual.getNodoSiguiente() != null){
+                nodoActual= nodoActual.getNodoSiguiente();
+            }
+        
+            nodoActual.setNodoSiguiente(nuevoNodo);
+        }
     }
     /**
      * elimina el dato en la posicion dada, si la posicion no esta en la lista 
@@ -259,5 +274,18 @@ public class ListaEnlazada <T extends Comparable<T>>{
             }
             nodoActual.setNodoSiguiente(null);
         }
+    }
+    // Metodos a implementar en colas y pilas
+
+    public boolean empty(){
+        return primerNodo == null;
+    }
+
+    public T dequeue(){
+        return this.primerNodo.getDato();
+    }
+
+    public T pop(){
+        return this.primerNodo.getDato();
     }
 }

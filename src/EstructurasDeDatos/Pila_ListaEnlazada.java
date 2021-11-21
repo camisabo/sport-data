@@ -2,16 +2,14 @@ package EstructurasDeDatos;
 
 import javax.management.RuntimeErrorException;
 
-public class Pila_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T>  {
-
-    // Atributos
-
-    private Nodo<T> top;
-
-    // Constructor
+public class Pila_ListaEnlazada<T extends Comparable<T>> extends ListaEnlazada<T>  {
 
     public Pila_ListaEnlazada(){
-        top = null;
+        super();
+    }
+    
+    public Pila_ListaEnlazada(T dato){
+        super(dato);
     }
 
     // Metodos
@@ -23,16 +21,7 @@ public class Pila_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T> 
 
     @Override //interface 
     public boolean empty(){
-        return top == null;
-    }
-
-    /**
-     * verifica si la pila esta llena
-     * @return "true" si la pila esta llena (en este caso no puede pasar)
-     */
-    @Override
-    public boolean full(){
-        return false;
+        return primerNodo == null;
     }
 
     /**
@@ -43,8 +32,8 @@ public class Pila_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T> 
     public void insertar(T dato){
 
         Nodo<T> nuevo_nodo = new Nodo<T>(dato);
-        nuevo_nodo.setNodoSiguiente(top);
-        top = nuevo_nodo;
+        nuevo_nodo.setNodoSiguiente(primerNodo);
+        primerNodo = nuevo_nodo;
     }
 
     /**
@@ -52,15 +41,15 @@ public class Pila_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T> 
      * @return el ultimo dato de la pila
      */
     @Override
-    public T eliminar(){
+    public T pop(){
 
         T dato = null;
         if(empty())
             throw new RuntimeErrorException(null, "La pila está vacía");
         else{
 
-            dato = top.getDato();
-            top = top.getNodoSiguiente();
+            dato = primerNodo.getDato();
+            primerNodo = primerNodo.getNodoSiguiente();
 
         }
         return dato;

@@ -42,41 +42,23 @@ public class deportista implements Comparable<deportista> {
         } else { // en caso normal
 
             this.númerodeidentificación = datos[0];
-        
-            String aux_nombre = "";
-
-            Pattern pattern = Pattern.compile("[0-9]");
-            Matcher matcher;
-            boolean matchFound;
-            int n = 0;
             int[] fechaNacimiento = new int[3];
-        
-            for (int i = 1; i < datos.length; i++) {
-                matcher = pattern.matcher(datos[i]);
-                matchFound = matcher.find();
-                if(matchFound) {
-                    fechaNacimiento[0] = Integer.parseInt(datos[i]);
-                    fechaNacimiento[1] = Integer.parseInt(datos[i+1]);
-                    fechaNacimiento[2] = Integer.parseInt(datos[i+2]);
-                    n = i + 3;
-                    i = datos.length;
-                } else {
-                    aux_nombre += datos[i] + " ";
-                }
+            String[] fecha = datos[2].split("-");
+            String aux_nombre = datos[1];
+
+            for (int i =0; i<fecha.length;i++){
+                fechaNacimiento[i] = Integer.parseInt(fecha[i]);
+
             }
 
             this.nombre = aux_nombre.replaceFirst("\\s++$", "");
 
             this.fechaDeNacimiento = LocalDate.of(fechaNacimiento[0], fechaNacimiento[1], fechaNacimiento[2]);
 
-            this.sexo = datos[n];
-            this.nivel = datos[n+1];
-            this.club = "";
-
-            for (int x = n+2; x < datos.length; x++) {
-                this.club += datos[x] + " ";
-            }
-
+            this.sexo = datos[3];
+            this.nivel = datos[4];
+            this.club = datos[5];
+            
             this.Categoria = generarCategoria(fechaDeNacimiento, refDate, nivel);
         }
     }

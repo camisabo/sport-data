@@ -4,8 +4,11 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import EstructurasDeDatos.Cola_ListaEnlazada;
 import EstructurasDeDatos.ListaDoblementeEnlazada;
 import EstructurasDeDatos.ListaEnlazada;
+import EstructurasDeDatos.Nodo;
+import EstructurasDeDatos.Pila_ListaEnlazada;
 
 public class Pruebas {
 
@@ -13,26 +16,45 @@ public class Pruebas {
 
     //1. CREAR DEPORTISTA
 
-    public static void CrearDeportista(String datos, ListaEnlazada<deportista> lista_deportistas) {
+    public static void CrearDeportista(Cola_ListaEnlazada<String> cola_datos, Pila_ListaEnlazada<deportista> pila_deportistas) {
 
-        String aux_str = datos.replace('-', ' ');
-        String[] datos_new_dep = aux_str.split(" ");
+        
+        String[] datos_new_dep = new String[6];
 
+        cola_datos.printLista();
+        for(int i=0; i<datos_new_dep.length;i++){
+            datos_new_dep[i]=cola_datos.dequeue();
+        }
+        
+        for(int i=0; i<datos_new_dep.length;i++){
+            System.out.print(datos_new_dep[i]+ " ");
+        }
         deportista new_dep = new deportista(datos_new_dep);
-        lista_deportistas.insertar(new_dep);
+        pila_deportistas.insertar(new_dep);
 
     }
 
     //ACTUALIZAR TXT
+    public static String Actualizar_txt (Pila_ListaEnlazada<deportista> pila_deportistas) {
+        String dep_txt_str = "";
+        deportista dep_txt;
+
+        while( pila_deportistas.primerNodo != null){
+
+            dep_txt = pila_deportistas.pop();
+            dep_txt_str += dep_txt.númerodeidentificación + "%" + dep_txt.nombre + "%" + dep_txt.fechaDeNacimiento + "%" + dep_txt.sexo + "%" + dep_txt.nivel + "%" + dep_txt.club + "\n";
+        }
+        return dep_txt_str;
+    }
+
     public static String Actualizar_txt (ListaEnlazada<deportista> lista_deportistas) {
         String dep_txt_str = "";
-
         for (int i = 0; i <= lista_deportistas.tamaño; i++) {
             deportista dep_txt = lista_deportistas.buscar(i);
             if(i==0) {
-                dep_txt_str += dep_txt.númerodeidentificación + " " + dep_txt.nombre + " " + dep_txt.fechaDeNacimiento + " " + dep_txt.sexo + " " + dep_txt.nivel + " " + dep_txt.club;
+                dep_txt_str += dep_txt.númerodeidentificación + "%" + dep_txt.nombre + "%" + dep_txt.fechaDeNacimiento + "%" + dep_txt.sexo + "%" + dep_txt.nivel + "%" + dep_txt.club;
             } else {
-                dep_txt_str += "\n" + dep_txt.númerodeidentificación + " " + dep_txt.nombre + " " + dep_txt.fechaDeNacimiento + " " + dep_txt.sexo + " " + dep_txt.nivel + " " + dep_txt.club;
+                dep_txt_str += "\n" + dep_txt.númerodeidentificación + "%" + dep_txt.nombre + "%" + dep_txt.fechaDeNacimiento + "%" + dep_txt.sexo + "%" + dep_txt.nivel + "%" + dep_txt.club;
             }
         }
 
@@ -107,11 +129,13 @@ public class Pruebas {
         BufferedReader bufferedReader;
 
         ListaDoblementeEnlazada<deportista> lista_deportistas = new ListaDoblementeEnlazada<deportista>(null); 
-
+        Cola_ListaEnlazada<String> cola_datos = new Cola_ListaEnlazada<String>();
+        Pila_ListaEnlazada<deportista> pila_deportistas = new Pila_ListaEnlazada<deportista>();
 
         //Ingreso todos los deportistas del txt a una lista
 
         try {
+
 
             File dataFile = new File("data.txt");
             fileReader = new FileReader(dataFile);
@@ -119,11 +143,12 @@ public class Pruebas {
             String currentLine = bufferedReader.readLine();
             int n = 0;
 
-            while(currentLine != null){
-                String dataLine = currentLine.replace('-', ' ');
-                String[] DataArray = dataLine.split(" ");
 
+            while(currentLine != null){
+
+                String[] DataArray = currentLine.split("%");
                 deportista dep = new deportista(DataArray);
+
 
                 if(n == 0) {
                     lista_deportistas.primerNodo.setDato(dep);
@@ -131,7 +156,33 @@ public class Pruebas {
                     lista_deportistas.insertar(dep);
                 }
 
+
                 n++;
+                currentLine = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+            fileReader.close();
+            
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        //Ingreso todos los deportistas del txt a una pila
+
+        try {
+
+            File dataFile = new File("data.txt");
+            fileReader = new FileReader(dataFile);
+            bufferedReader = new BufferedReader(fileReader);
+            String currentLine = bufferedReader.readLine();
+
+            while(currentLine != null){
+                
+                System.out.println(currentLine);
+                String[] DataArray = currentLine.split("%");
+                System.out.println(DataArray.length);
+                deportista dep = new deportista(DataArray);
+                pila_deportistas.insertar(dep);
                 currentLine = bufferedReader.readLine();
             }
             bufferedReader.close();
@@ -158,23 +209,21 @@ public class Pruebas {
                 
                 System.out.println();
                 System.out.println(" Ingrese los siguientes datos línea por línea y en este orden: Número de identificación, nombre,"
-                + " fecha de nacimiento (yyyy-m-dd), sexo (M,F), nivel (escuela, novatos, ligados), club");
-
-                String datos = "";
+                + " fecha de nacimiento (yyyy/mm/dd), sexo (M,F), nivel (escuela, novatos, ligados), club");
                 
                 Scanner sc = new Scanner(System.in);
 
                 for(int i = 0; i < 6; i++) {
-                    datos += sc.nextLine() + " ";
+                    cola_datos.insertar(sc.nextLine());
                 }
 
                 //Llamamos la función
-                CrearDeportista(datos, lista_deportistas);
+                CrearDeportista(cola_datos, pila_deportistas);
 
                 //Actualizamos txt
 
                 FileWriter myWriter = new FileWriter("data.txt");
-                String dep_txt_str = Actualizar_txt(lista_deportistas);
+                String dep_txt_str = Actualizar_txt(pila_deportistas);
                 myWriter.write(dep_txt_str);
                 myWriter.close();
 

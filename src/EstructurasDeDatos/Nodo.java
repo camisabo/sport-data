@@ -5,6 +5,8 @@
  */
 package EstructurasDeDatos;
 
+import deportista.deportista;
+
 /**
  *
  * @author Omar Nicolas Guerrero
