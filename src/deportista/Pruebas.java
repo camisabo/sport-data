@@ -388,7 +388,7 @@ public class Pruebas {
                     if(pos == lista_deportistas.tamaño) {
                         lista_deportistas.eliminar();
                     } else {
-                        lista_deportistas.eliminar(dep_borrar);
+                        lista_deportistas.eliminar(pos);
                     }
 
                     //Actualizamos txt

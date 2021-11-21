@@ -179,7 +179,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
                 nodoActual= nodoActual.getNodoSiguiente();
             }
         
-            nodoActual.setNodoSiguiente(nuevoNodo);
+        nodoActual.setNodoSiguiente(nuevoNodo);
         }
     }
     /**
