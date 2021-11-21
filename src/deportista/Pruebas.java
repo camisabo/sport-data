@@ -7,7 +7,6 @@ import java.util.Scanner;
 import EstructurasDeDatos.Cola_ListaEnlazada;
 import EstructurasDeDatos.ListaDoblementeEnlazada;
 import EstructurasDeDatos.ListaEnlazada;
-import EstructurasDeDatos.Nodo;
 import EstructurasDeDatos.Pila_ListaEnlazada;
 
 public class Pruebas {
@@ -24,10 +23,6 @@ public class Pruebas {
         cola_datos.printLista();
         for(int i=0; i<datos_new_dep.length;i++){
             datos_new_dep[i]=cola_datos.dequeue();
-        }
-        
-        for(int i=0; i<datos_new_dep.length;i++){
-            System.out.print(datos_new_dep[i]+ " ");
         }
         deportista new_dep = new deportista(datos_new_dep);
         pila_deportistas.insertar(new_dep);
@@ -178,9 +173,7 @@ public class Pruebas {
 
             while(currentLine != null){
                 
-                System.out.println(currentLine);
                 String[] DataArray = currentLine.split("%");
-                System.out.println(DataArray.length);
                 deportista dep = new deportista(DataArray);
                 pila_deportistas.insertar(dep);
                 currentLine = bufferedReader.readLine();
