@@ -7,8 +7,6 @@ package deportista;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *

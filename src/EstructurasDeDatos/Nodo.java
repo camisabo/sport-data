@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package EstructurasDeDatos;
-
-import deportista.deportista;
-
 /**
  *
  * @author Omar Nicolas Guerrero

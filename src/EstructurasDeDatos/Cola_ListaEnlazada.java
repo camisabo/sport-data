@@ -37,6 +37,7 @@ public class Cola_ListaEnlazada<T extends Comparable<T>> extends ListaEnlazada<T
     @Override
     public void insertar(T dato){
 
+        tamaño++;
         Nodo<T> nuevo_nodo = new Nodo<T>(dato);
         if(empty())
             primerNodo = nuevo_nodo;

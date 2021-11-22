@@ -193,6 +193,7 @@ public class Pruebas {
         System.out.println("2. Buscar deportista");
         System.out.println("3. Actualizar un deportista");
         System.out.println("4. Eliminar un deportista");
+        System.out.println("5. Mostrar deportistas");
 
         Scanner sc_eleccion = new Scanner(System.in);
         int eleccion = sc_eleccion.nextInt();
@@ -396,6 +397,21 @@ public class Pruebas {
 
                     break;
 
+                }
+
+                break;
+            case 5:
+                
+                String[] arreglo_imprimir = new String[lista_deportistas.tamaño+1];
+
+                
+                for (int i =0; i<arreglo_imprimir.length; i++){
+
+                    arreglo_imprimir[i]=lista_deportistas.buscar(i).númerodeidentificación + lista_deportistas.buscar(i).nombre + lista_deportistas.buscar(i).Categoria +lista_deportistas.buscar(i).sexo +lista_deportistas.buscar(i).nivel + lista_deportistas.buscar(i).club;
+                }
+
+                for (int k =0; k<arreglo_imprimir.length; k++){
+                    System.out.println(arreglo_imprimir[k]+"\t");
                 }
 
                 break;

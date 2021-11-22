@@ -31,6 +31,7 @@ public class Pila_ListaEnlazada<T extends Comparable<T>> extends ListaEnlazada<T
     @Override
     public void insertar(T dato){
 
+        tamaño++;
         Nodo<T> nuevo_nodo = new Nodo<T>(dato);
         nuevo_nodo.setNodoSiguiente(primerNodo);
         primerNodo = nuevo_nodo;
