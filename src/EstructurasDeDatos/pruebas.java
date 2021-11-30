@@ -5,6 +5,8 @@
  */
 package EstructurasDeDatos;
 
+import java.util.Scanner;
+
 
 /**
  *
@@ -17,35 +19,12 @@ public class pruebas <T> {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-//        
-//        lista.insertar(34);
-//        lista.insertar(334);
-//        lista.insertar(3123);
-//        lista.insertar(134);
-//        lista.insertar(344);
-//        lista.insertar(12344);
-//        lista.insertar(35);
-//        lista.printLista();
-//        lista.insertar(0, 1);
-////        lista.printLista();
-////        System.out.println(lista.buscar(0));
-////        System.out.println(lista.buscar(123));
-////        lista.eliminar(5);
-//        System.out.println("-----------------------");
-//        lista.printLista();
-//        lista.eliminar(new Integer(52));
-//        System.out.println("-----------------------");
-//        lista.printLista();
-////        lista.eliminar();
-////        System.out.println("-----------------------");
-////        lista.printLista();
-        
-        ListaDoblementeEnlazada<Integer> lista2 = new ListaDoblementeEnlazada<>(12);
-        lista2.insertar(13);
-        lista2.insertar(11, 0);
-        System.out.println(lista2.buscarPos(1));
+        Scanner entrada = new Scanner(System.in);
 
+        ListaEnlazada lista = new ListaEnlazada(12);
+        lista.insertar(12, 1);
+        lista.insertar(12, 1);
+        
     }
     
 }

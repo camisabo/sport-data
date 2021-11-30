@@ -5,8 +5,7 @@
  */
 package EstructurasDeDatos;
 
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-
+import java.lang.IllegalArgumentException;
 /**
  *
  * 
@@ -118,7 +117,9 @@ public class ListaEnlazada <T extends Comparable<T>>{
      * @param posicion Numero entero que determina la posicion en la que se
      * coloca el nuevo dato
      */
-    public void insertar (T nuevoDato, int posicion){
+    
+    public void insertar (T nuevoDato, int posicion) throws IllegalArgumentException{
+        
         tamaño++;
         Nodo<T> nodoActual = primerNodo;
         Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);

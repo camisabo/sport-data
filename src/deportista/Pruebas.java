@@ -8,6 +8,8 @@ import EstructurasDeDatos.ListaDoblementeEnlazada;
 import EstructurasDeDatos.ListaEnlazada;
 
 public class Pruebas {
+    
+    
 
     //MÉTODOS
 
@@ -15,11 +17,46 @@ public class Pruebas {
 
     public static void CrearDeportista(String datos, ListaEnlazada<deportista> lista_deportistas) {
 
+        Scanner entrada = new Scanner(System.in);
         String aux_str = datos.replace('-', ' ');
         String[] datos_new_dep = aux_str.split(" ");
 
+        for(int i =0;i<datos_new_dep.length;i++){
+            switch (i){
+                case 0  :
+                    boolean verificacion = false;
+                    while (!verificacion || 9>datos_new_dep[0].length()) {
+                        try {
+                            System.out.println("-->"+datos_new_dep[0].length()+"<--");
+                            Integer.parseInt(datos_new_dep[0]);
+                            if (datos_new_dep[0].length()>=9) {
+                                break;
+                            }
+                        } catch (NumberFormatException e) {
+                            
+                        }
+                        System.out.println("El dato ingresado en \"Numero de"
+                                    + " identificacion\" \nes demaciado corto (menor"
+                                    + " que 9 caracteres) o no es un numero");
+                        datos_new_dep[0] = entrada.nextLine();
+                    }
+                    break;
+                case 1:
+                    while (datos_new_dep[1].length()<3) {
+                        
+                        System.out.println("El dato ingresado en \"Nombre\" es"
+                                + " muy corto(menos de 3 caracteres)");
+                        datos_new_dep[1] = entrada.nextLine();
+                    }
+                    break;
+                    
+                /*aqui jace falta los demas casos para revisar la info pero no 
+                  supe como */
+            }
+        
         deportista new_dep = new deportista(datos_new_dep);
         lista_deportistas.insertar(new_dep);
+        }
 
     }
 
@@ -151,14 +188,26 @@ public class Pruebas {
         System.out.println("4. Eliminar un deportista");
 
         Scanner sc_eleccion = new Scanner(System.in);
-        int eleccion = sc_eleccion.nextInt();
+        boolean datoEsInt = false;
+        int eleccion = 0;
+        while (datoEsInt == false) {
+            try {
+                eleccion = sc_eleccion.nextInt();
+                datoEsInt = true;
+            } catch (Exception e) {
+                System.out.println("El dato ingresado debe ser un numero entre 1 y 4");
+                sc_eleccion.next();
+            }
+            
+        }
+        
 
         switch (eleccion) {
             case 1: // 1. Crear deportista
                 
                 System.out.println();
-                System.out.println(" Ingrese los siguientes datos línea por línea y en este orden: Número de identificación, nombre,"
-                + " fecha de nacimiento (yyyy-m-dd), sexo (M,F), nivel (escuela, novatos, ligados), club");
+                System.out.println(" Ingrese los siguientes datos línea por línea y en este orden:\n ->Número de identificación\n ->nombre"
+                + "\n ->fecha de nacimiento (yyyy-m-dd)\n ->sexo (M,F)\n ->nivel (escuela, novatos, ligados)\n ->club");
 
                 String datos = "";
                 
@@ -363,11 +412,6 @@ public class Pruebas {
         }
 
         sc_eleccion.close();
-
-
-
-
-        
     }
     
 }
