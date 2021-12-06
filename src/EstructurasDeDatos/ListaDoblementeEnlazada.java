@@ -5,6 +5,7 @@
  */
 package EstructurasDeDatos;
 
+
 /**
  *
  * @author Omar Nicolas Guerrero
@@ -14,10 +15,12 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
     //atributos
     Nodo<T> ultimoNodo;
 
+
     public ListaDoblementeEnlazada(T dato) {
         super(dato);
         this.ultimoNodo = primerNodo;
     }
+
 
     @Override
     public void eliminar() {
@@ -40,6 +43,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
         
     }
 
+
     @Override
     public void eliminar(int posicion) {
         Nodo<T> nodoActual = primerNodo;
@@ -57,9 +61,11 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
             nodoActual.setNodoSiguiente(null);
         }
 
+
         else if (posicion==tamaño){
             eliminar();
         }
+
 
         //en un caso normal
         else {
@@ -68,11 +74,13 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
                 eliminar();
             }
 
+
             //si es mas efectivo por la cabeza
             else if (posicion <= ((int)(tamaño/2))){
                 for(int i = 0; i< posicion-1;i++){  // apuntador anterior a la posición a eliminar
                     nodoActual = nodoActual.getNodoSiguiente();
                 }
+
 
                 //se quita la referencia al nodo seleccionado
                 nodoActual.setNodoSiguiente((nodoActual.getNodoSiguiente()).getNodoSiguiente());
@@ -88,6 +96,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
                 //se quita la referencia al nodo seleccionado
                 ((nodoActual.getNodoAnterior()).getNodoAnterior()).setNodoSiguiente(nodoActual);
                 nodoActual.setNodoAnterior((nodoActual.getNodoAnterior()).getNodoAnterior());
+
 
             }
         }
@@ -105,6 +114,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
         nuevoNodo.setNodoAnterior(nodoActual);
         ultimoNodo=nuevoNodo;
     }
+
 
     
     @Override
@@ -125,6 +135,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
             
         }
 
+
         //si la posicion es igual al tamaño
         else if (posicion==tamaño){
             (ultimoNodo.getNodoAnterior()).setNodoSiguiente(nuevoNodo);
@@ -133,6 +144,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
             ultimoNodo.setNodoAnterior(nuevoNodo);
         }
 
+
         //en un caso normal
         else {
             //verificamos que la posicion existe
@@ -140,6 +152,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
                 insertar(nuevoDato);
                 tamaño--;
             }
+
 
             //si es mas efectivo por la cabeza
             else if (posicion <= ((int)(tamaño/2))){
@@ -150,6 +163,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
                 nodoActual.setNodoSiguiente(nuevoNodo);
                 nuevoNodo.setNodoAnterior(nodoActual);
                 (nuevoNodo.getNodoSiguiente()).setNodoAnterior(nuevoNodo);
+
 
             } 
             //si es más efectivo por la cola
@@ -163,16 +177,19 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
                 (nuevoNodo.getNodoAnterior()).setNodoSiguiente(nuevoNodo);
                 nuevoNodo.setNodoSiguiente(nodoActual);
 
+
             }
         }
         tamaño++;
     }
+
 
     
     public T buscar (int posicion) {
         Nodo<T> nodoActual = primerNodo;
         Boolean buscando = true;
         int posicionActual = 0;
+
 
         //si es mas efectivo por la cabeza
         if (posicion <= ((int)(tamaño/2))){
@@ -201,6 +218,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
             }
             
         }
+
 
         return null;
     }

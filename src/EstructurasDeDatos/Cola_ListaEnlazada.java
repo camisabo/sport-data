@@ -2,17 +2,20 @@ package EstructurasDeDatos;
 
 import javax.management.RuntimeErrorException;
 
-public class Cola_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T>{
+public class Cola_ListaEnlazada<T extends Comparable<T>> extends ListaEnlazada<T>{
 
     // Atributos
 
-    private Nodo<T> cabeza,cola;
+    private Nodo<T> ultimoNodo;
 
     // Constructor
-
     public Cola_ListaEnlazada(){
-        cabeza = null;
-        cola = null;
+        super();
+        this.ultimoNodo=primerNodo;
+    }
+    public Cola_ListaEnlazada(T dato){
+        super(dato);
+        this.ultimoNodo = primerNodo;
     }
 
     // Metodos
@@ -24,16 +27,7 @@ public class Cola_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T>{
 
     @Override
     public boolean empty(){
-        return cola == null;
-    }
-
-    /**
-     * verifica si la cola esta llena
-     * @return "true" si la cola esta llena (en este caso no puede pasar)
-     */
-    @Override
-    public boolean full(){
-        return false;
+        return ultimoNodo == null;
     }
 
     /**
@@ -43,12 +37,13 @@ public class Cola_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T>{
     @Override
     public void insertar(T dato){
 
+        tamaño++;
         Nodo<T> nuevo_nodo = new Nodo<T>(dato);
         if(empty())
-            cabeza = nuevo_nodo;
+            primerNodo = nuevo_nodo;
         else
-            cola.setNodoSiguiente(nuevo_nodo);
-        cola = nuevo_nodo;
+            ultimoNodo.setNodoSiguiente(nuevo_nodo);
+        ultimoNodo = nuevo_nodo;
     }
 
     /**
@@ -56,14 +51,14 @@ public class Cola_ListaEnlazada<T extends Comparable<T>> implements Interfaz<T>{
      * @return el perimer dato de la cola
      */
     @Override
-    public T eliminar(){
+    public T dequeue(){
 
         T dato = null;
         if(empty())
             throw new RuntimeErrorException(null, "La cola está vacía");
         else{
-            dato = cabeza.getDato();
-            cabeza = cabeza.getNodoSiguiente();
+            dato = primerNodo.getDato();
+            primerNodo = primerNodo.getNodoSiguiente();
             
         }
         return dato;

@@ -4,8 +4,10 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import EstructurasDeDatos.Cola_ListaEnlazada;
 import EstructurasDeDatos.ListaDoblementeEnlazada;
 import EstructurasDeDatos.ListaEnlazada;
+import EstructurasDeDatos.Pila_ListaEnlazada;
 
 public class Pruebas {
     
@@ -15,61 +17,41 @@ public class Pruebas {
 
     //1. CREAR DEPORTISTA
 
-    public static void CrearDeportista(String datos, ListaEnlazada<deportista> lista_deportistas) {
+    public static void CrearDeportista(Cola_ListaEnlazada<String> cola_datos, Pila_ListaEnlazada<deportista> pila_deportistas) {
 
-        Scanner entrada = new Scanner(System.in);
-        String aux_str = datos.replace('-', ' ');
-        String[] datos_new_dep = aux_str.split(" ");
 
-        for(int i =0;i<datos_new_dep.length;i++){
-            switch (i){
-                case 0  :
-                    boolean verificacion = false;
-                    while (!verificacion || 9>datos_new_dep[0].length()) {
-                        try {
-                            System.out.println("-->"+datos_new_dep[0].length()+"<--");
-                            Integer.parseInt(datos_new_dep[0]);
-                            if (datos_new_dep[0].length()>=9) {
-                                break;
-                            }
-                        } catch (NumberFormatException e) {
-                            
-                        }
-                        System.out.println("El dato ingresado en \"Numero de"
-                                    + " identificacion\" \nes demaciado corto (menor"
-                                    + " que 9 caracteres) o no es un numero");
-                        datos_new_dep[0] = entrada.nextLine();
-                    }
-                    break;
-                case 1:
-                    while (datos_new_dep[1].length()<3) {
-                        
-                        System.out.println("El dato ingresado en \"Nombre\" es"
-                                + " muy corto(menos de 3 caracteres)");
-                        datos_new_dep[1] = entrada.nextLine();
-                    }
-                    break;
-                    
-                /*aqui jace falta los demas casos para revisar la info pero no 
-                  supe como */
-            }
-        
-        deportista new_dep = new deportista(datos_new_dep);
-        lista_deportistas.insertar(new_dep);
+        String[] datos_new_dep = new String[6];
+
+        cola_datos.printLista();
+        for(int i=0; i<datos_new_dep.length;i++){
+            datos_new_dep[i]=cola_datos.dequeue();
         }
+        deportista new_dep = new deportista(datos_new_dep);
+        pila_deportistas.insertar(new_dep);
 
     }
 
     //ACTUALIZAR TXT
+    public static String Actualizar_txt (Pila_ListaEnlazada<deportista> pila_deportistas) {
+        String dep_txt_str = "";
+        deportista dep_txt;
+
+        while( pila_deportistas.primerNodo != null){
+
+            dep_txt = pila_deportistas.pop();
+            dep_txt_str += dep_txt.númerodeidentificación + "%" + dep_txt.nombre + "%" + dep_txt.fechaDeNacimiento + "%" + dep_txt.sexo + "%" + dep_txt.nivel + "%" + dep_txt.club + "\n";
+        }
+        return dep_txt_str;
+    }
+
     public static String Actualizar_txt (ListaEnlazada<deportista> lista_deportistas) {
         String dep_txt_str = "";
-
         for (int i = 0; i <= lista_deportistas.tamaño; i++) {
             deportista dep_txt = lista_deportistas.buscar(i);
             if(i==0) {
-                dep_txt_str += dep_txt.númerodeidentificación + " " + dep_txt.nombre + " " + dep_txt.fechaDeNacimiento + " " + dep_txt.sexo + " " + dep_txt.nivel + " " + dep_txt.club;
+                dep_txt_str += dep_txt.númerodeidentificación + "%" + dep_txt.nombre + "%" + dep_txt.fechaDeNacimiento + "%" + dep_txt.sexo + "%" + dep_txt.nivel + "%" + dep_txt.club;
             } else {
-                dep_txt_str += "\n" + dep_txt.númerodeidentificación + " " + dep_txt.nombre + " " + dep_txt.fechaDeNacimiento + " " + dep_txt.sexo + " " + dep_txt.nivel + " " + dep_txt.club;
+                dep_txt_str += "\n" + dep_txt.númerodeidentificación + "%" + dep_txt.nombre + "%" + dep_txt.fechaDeNacimiento + "%" + dep_txt.sexo + "%" + dep_txt.nivel + "%" + dep_txt.club;
             }
         }
 
@@ -144,11 +126,13 @@ public class Pruebas {
         BufferedReader bufferedReader;
 
         ListaDoblementeEnlazada<deportista> lista_deportistas = new ListaDoblementeEnlazada<deportista>(null); 
-
+        Cola_ListaEnlazada<String> cola_datos = new Cola_ListaEnlazada<String>();
+        Pila_ListaEnlazada<deportista> pila_deportistas = new Pila_ListaEnlazada<deportista>();
 
         //Ingreso todos los deportistas del txt a una lista
 
         try {
+
 
             File dataFile = new File("data.txt");
             fileReader = new FileReader(dataFile);
@@ -156,11 +140,12 @@ public class Pruebas {
             String currentLine = bufferedReader.readLine();
             int n = 0;
 
-            while(currentLine != null){
-                String dataLine = currentLine.replace('-', ' ');
-                String[] DataArray = dataLine.split(" ");
 
+            while(currentLine != null){
+
+                String[] DataArray = currentLine.split("%");
                 deportista dep = new deportista(DataArray);
+
 
                 if(n == 0) {
                     lista_deportistas.primerNodo.setDato(dep);
@@ -168,7 +153,31 @@ public class Pruebas {
                     lista_deportistas.insertar(dep);
                 }
 
+
                 n++;
+                currentLine = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+            fileReader.close();
+            
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        //Ingreso todos los deportistas del txt a una pila
+
+        try {
+
+            File dataFile = new File("data.txt");
+            fileReader = new FileReader(dataFile);
+            bufferedReader = new BufferedReader(fileReader);
+            String currentLine = bufferedReader.readLine();
+
+            while(currentLine != null){
+                
+                String[] DataArray = currentLine.split("%");
+                deportista dep = new deportista(DataArray);
+                pila_deportistas.insertar(dep);
                 currentLine = bufferedReader.readLine();
             }
             bufferedReader.close();
@@ -186,6 +195,7 @@ public class Pruebas {
         System.out.println("2. Buscar deportista");
         System.out.println("3. Actualizar un deportista");
         System.out.println("4. Eliminar un deportista");
+        System.out.println("5. Mostrar deportistas");
 
         Scanner sc_eleccion = new Scanner(System.in);
         boolean datoEsInt = false;
@@ -210,20 +220,21 @@ public class Pruebas {
                 + "\n ->fecha de nacimiento (yyyy-m-dd)\n ->sexo (M,F)\n ->nivel (escuela, novatos, ligados)\n ->club");
 
                 String datos = "";
+
                 
                 Scanner sc = new Scanner(System.in);
 
                 for(int i = 0; i < 6; i++) {
-                    datos += sc.nextLine() + " ";
+                    cola_datos.insertar(sc.nextLine());
                 }
 
                 //Llamamos la función
-                CrearDeportista(datos, lista_deportistas);
+                CrearDeportista(cola_datos, pila_deportistas);
 
                 //Actualizamos txt
 
                 FileWriter myWriter = new FileWriter("data.txt");
-                String dep_txt_str = Actualizar_txt(lista_deportistas);
+                String dep_txt_str = Actualizar_txt(pila_deportistas);
                 myWriter.write(dep_txt_str);
                 myWriter.close();
 
@@ -388,7 +399,7 @@ public class Pruebas {
                     if(pos == lista_deportistas.tamaño) {
                         lista_deportistas.eliminar();
                     } else {
-                        lista_deportistas.eliminar(dep_borrar);
+                        lista_deportistas.eliminar(pos);
                     }
 
                     //Actualizamos txt
@@ -403,6 +414,21 @@ public class Pruebas {
 
                     break;
 
+                }
+
+                break;
+            case 5:
+                
+                String[] arreglo_imprimir = new String[lista_deportistas.tamaño+1];
+
+                
+                for (int i =0; i<arreglo_imprimir.length; i++){
+
+                    arreglo_imprimir[i]=lista_deportistas.buscar(i).númerodeidentificación + lista_deportistas.buscar(i).nombre + lista_deportistas.buscar(i).Categoria +lista_deportistas.buscar(i).sexo +lista_deportistas.buscar(i).nivel + lista_deportistas.buscar(i).club;
+                }
+
+                for (int k =0; k<arreglo_imprimir.length; k++){
+                    System.out.println(arreglo_imprimir[k]+"\t");
                 }
 
                 break;
