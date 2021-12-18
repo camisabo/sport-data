@@ -25,7 +25,7 @@ public class ListaEnlazada <T extends Comparable<T>>{
     }
 
     public ListaEnlazada(T dato) {
-        this.primerNodo = new Nodo<>(dato);
+        this.primerNodo = new Nodo(dato);
     }
 
     //getters and setters

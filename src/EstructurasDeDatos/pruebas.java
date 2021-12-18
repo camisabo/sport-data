@@ -21,10 +21,13 @@ public class pruebas <T> {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
-        ListaEnlazada lista = new ListaEnlazada(12);
-        lista.insertar(12, 1);
-        lista.insertar(12, 1);
+//        ListaEnlazada lista = new ListaEnlazada(12);
+//        lista.insertar(12, 1);
+//        lista.insertar(12, 1);
+        
+        ArbolAVL<Integer> arbol = new ArbolAVL(12);
         
     }
+    
     
 }

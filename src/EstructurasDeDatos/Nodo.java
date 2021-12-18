@@ -13,7 +13,7 @@ package EstructurasDeDatos;
 public class Nodo <T extends Comparable<T>> {
     private Nodo <T> NodoSiguiente;
     private Nodo <T> NodoAnterior;
-    public T dato;
+    private T dato;
     
     //contructor
     public Nodo(T dato){
