@@ -60,9 +60,10 @@ public class NodoArbol <T extends Comparable<T>> {
         this.altura = altura;
     }
 
-    public T getDato() {
+    public T getDato() { 
         return dato;
     }
+    
 
     public void setDato(T dato) {
         this.dato = dato;

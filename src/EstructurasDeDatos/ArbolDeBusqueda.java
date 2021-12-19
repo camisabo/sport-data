@@ -63,14 +63,14 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * @return el nodo que se ingreso en los parametros para qe la recursividad 
      * funcione
      */
-    private NodoArbol insertar(NodoArbol nodoAEvaluar, T dato){
+    private NodoArbol insertar(NodoArbol nodoAEvaluar, T dato) throws StackOverflowError{
         if (nodoAEvaluar == null){
             return new NodoArbol(dato);
         }
-        if (nodoAEvaluar.getDato().compareTo(dato)>0){
+        if (nodoAEvaluar.getDato().compareTo(dato)<0){
             nodoAEvaluar.setNodoHijoDerecha(insertar(nodoAEvaluar.getNodoHijoDerecha(), dato));
         }
-        if (nodoAEvaluar.getDato().compareTo(dato)<0){
+        if (nodoAEvaluar.getDato().compareTo(dato)>0){
             nodoAEvaluar.setNodoHijoIzquierda(insertar(nodoAEvaluar.getNodoHijoIzquierda(), dato));
         }
         return nodoAEvaluar;
@@ -81,7 +81,12 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * @param dato dato que se busca ingresar en el arbol
      */
     public void insertar(T dato){
-        raiz = insertar(raiz, dato);
+        try {
+            raiz = insertar(raiz, dato);
+        } catch (StackOverflowError e) {
+            System.out.println("se a llenado la memoria por rxeso de inseciones");
+        }
+        
     }
     
     /**
@@ -163,20 +168,20 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * @param nodoAEvaluar es el nodo base que se va a evaluar
      * @return el nodo que se busca eliminar para facilitar la recurcividad
      */
-    private  NodoArbol remover (Comparable dato, NodoArbol nodoAEvaluar){
+    private  NodoArbol eliminar (Comparable dato, NodoArbol nodoAEvaluar){
         if (nodoAEvaluar == null) {
             return nodoAEvaluar;
         }
         int compaReresult = nodoAEvaluar.getDato().compareTo(dato)*-1;
         if (compaReresult < 0){
-            nodoAEvaluar.setNodoHijoIzquierda(remover(dato, nodoAEvaluar.getNodoHijoIzquierda()));
+            nodoAEvaluar.setNodoHijoIzquierda(eliminar(dato, nodoAEvaluar.getNodoHijoIzquierda()));
         }
         else if (compaReresult > 0) {
-            nodoAEvaluar.setNodoHijoDerecha(remover(dato, nodoAEvaluar.getNodoHijoDerecha()));
+            nodoAEvaluar.setNodoHijoDerecha(eliminar(dato, nodoAEvaluar.getNodoHijoDerecha()));
         }
         else if (nodoAEvaluar.getNodoHijoIzquierda() != null && nodoAEvaluar.getNodoHijoDerecha() != null) {
             nodoAEvaluar.setDato(minimo(nodoAEvaluar.getNodoHijoDerecha()).getDato());
-            nodoAEvaluar.setNodoHijoDerecha(remover(nodoAEvaluar.getDato(), nodoAEvaluar.getNodoHijoDerecha()));
+            nodoAEvaluar.setNodoHijoDerecha(eliminar(nodoAEvaluar.getDato(), nodoAEvaluar.getNodoHijoDerecha()));
         }
         else {
             nodoAEvaluar = (nodoAEvaluar.getNodoHijoIzquierda() != null) ? nodoAEvaluar.getNodoHijoIzquierda():nodoAEvaluar.getNodoHijoDerecha();
@@ -188,8 +193,8 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * metodo que para eliminar solamente pide el dato a eliminar por practicidad
      * @param dato dato que se busca remover del arbol
      */
-    public void remover(T dato){
-        raiz = remover(dato, raiz);
+    public void eliminar(T dato){
+        raiz = eliminar(dato, raiz);
     }
     
     /**
