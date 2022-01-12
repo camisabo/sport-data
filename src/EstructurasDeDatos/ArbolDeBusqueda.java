@@ -14,7 +14,6 @@ import java.lang.Exception;
 public class ArbolDeBusqueda<T extends Comparable<T>> {
     //atributos
     public NodoArbol<T> raiz;
-    private T dato;
 
     public ArbolDeBusqueda() {
         raiz = null;

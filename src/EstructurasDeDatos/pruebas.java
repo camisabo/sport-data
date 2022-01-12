@@ -25,24 +25,26 @@ public class pruebas <T> {
 //        lista.insertar(12, 1);
 //        lista.insertar(12, 1);
         
-        ArbolDeBusqueda<Integer> arbol = new ArbolDeBusqueda(5000);
-        for (int i = 0; i < 5000; i++) {
-            if (i%2 ==0){
-                arbol.insertar(i);
-            }
-            else{
-                arbol.insertar(10000-i);
-            }
-        }
-        System.out.println(arbol.altura(arbol.raiz));
-        arbol.eliminar(9999);
-        
-        if(arbol.raiz.getNodoHijoDerecha() != null)
-            System.out.println(arbol.raiz.getNodoHijoDerecha().getDato());
-        
-        if(arbol.raiz.getNodoHijoIzquierda() != null)
-            System.out.println(arbol.raiz.getNodoHijoIzquierda().getDato());
-        
+//        ArbolDeBusqueda<Integer> arbol = new ArbolDeBusqueda(5000);
+//        for (int i = 0; i < 5000; i++) {
+//            if (i%2 ==0){
+//                arbol.insertar(i);
+//            }
+//            else{
+//                arbol.insertar(10000-i);
+//            }
+//        }
+//        System.out.println(arbol.altura(arbol.raiz));
+//        arbol.eliminar(9999);
+//        
+//        if(arbol.raiz.getNodoHijoDerecha() != null)
+//            System.out.println(arbol.raiz.getNodoHijoDerecha().getDato());
+//        
+//        if(arbol.raiz.getNodoHijoIzquierda() != null)
+//            System.out.println(arbol.raiz.getNodoHijoIzquierda().getDato());
+//        
+          ArbolAVL<Integer> arbolAVL = new ArbolAVL(12);
+          
         
         
     }
