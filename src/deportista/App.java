@@ -9,7 +9,7 @@ import EstructurasDeDatos.ListaDoblementeEnlazada;
 import EstructurasDeDatos.ListaEnlazada;
 import EstructurasDeDatos.Pila_ListaEnlazada;
 
-public class Pruebas {
+public class App {
     
     
 
@@ -196,6 +196,7 @@ public class Pruebas {
         System.out.println("3. Actualizar un deportista");
         System.out.println("4. Eliminar un deportista");
         System.out.println("5. Mostrar deportistas");
+        System.out.println("6. Administrar competencia");
 
         Scanner sc_eleccion = new Scanner(System.in);
         boolean datoEsInt = false;
@@ -417,6 +418,9 @@ public class Pruebas {
                 }
 
                 break;
+            
+            // 5. Mostrar todos los deportistas
+            
             case 5:
                 
                 String[] arreglo_imprimir = new String[lista_deportistas.tamaño+1];
@@ -429,6 +433,68 @@ public class Pruebas {
 
                 for (int k =0; k<arreglo_imprimir.length; k++){
                     System.out.println(arreglo_imprimir[k]+"\t");
+                }
+
+                break;
+
+            // 6. Administrar competencia
+
+            case 6:
+
+                // Primero pasamos los datos del txt a la clase competencia
+
+                File dataFile2 = new File("competencia1.txt");
+                fileReader = new FileReader(dataFile2);
+                bufferedReader = new BufferedReader(fileReader);
+                String currentLine = bufferedReader.readLine();
+                Cola_ListaEnlazada<String> IDs = new Cola_ListaEnlazada<>();
+
+                while(currentLine != null) {
+                    IDs.insertar(currentLine);
+                }
+
+                competencia competencia1 = new competencia(IDs, lista_deportistas);
+
+                System.out.println();
+                System.out.println("¿ Qué desea hacer?");
+                System.out.println("1. Inscribir deportistas");
+                System.out.println("2. Ingresar tiempos");
+
+                Scanner sc_Comp = new Scanner(System.in);
+                int elec_Comp = sc_Comp.nextInt();
+
+                switch (elec_Comp) {
+                    case 1:
+
+                        System.out.println();
+                        System.out.println("Ingrese el número de deportistas a inscribir:");
+
+                        int num_deportistas_inscribir = sc_Comp.nextInt();
+
+                        System.out.println("Digite los números de identificación de los deportitas linea por linea:");
+                        String blankspace = sc_Comp.nextLine();
+
+                        Cola_ListaEnlazada<String> Ids_inscribir = new Cola_ListaEnlazada<>();
+
+                        for (int i = 0; i < num_deportistas_inscribir; i++) {
+                            Ids_inscribir.insertar(sc_Comp.nextLine());
+                        }
+
+                        // Agregamos deportistas
+
+                        competencia1.inscribirDeportistas(Ids_inscribir, lista_deportistas);
+
+                        // Actualizamos TXT
+
+                        FileWriter myWriter3 = new FileWriter("competencia1.txt");
+                        String competencia_txt = Actualizar_txt(competencia1.deportistas);
+                        myWriter3.write(competencia_txt);
+                        myWriter3.close();
+                        
+                        break;
+                
+                    default:
+                        break;
                 }
 
                 break;

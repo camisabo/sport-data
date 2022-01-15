@@ -43,7 +43,6 @@ public class pruebas <T> {
 //        if(arbol.raiz.getNodoHijoIzquierda() != null)
 //            System.out.println(arbol.raiz.getNodoHijoIzquierda().getDato());
 //        
-          ArbolAVL<Integer> arbolAVL = new ArbolAVL(12);
           
         
         
