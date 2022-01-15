@@ -443,11 +443,11 @@ public class App {
 
                 // Primero pasamos los datos del txt a la clase competencia
 
-                File dataFile2 = new File("competencia1.txt");
-                fileReader = new FileReader(dataFile2);
+                File dataFile = new File("competencia1.txt");
+                fileReader = new FileReader(dataFile);
                 bufferedReader = new BufferedReader(fileReader);
                 String currentLine = bufferedReader.readLine();
-                Cola_ListaEnlazada<String> IDs = new Cola_ListaEnlazada<>();
+                Pila_ListaEnlazada<String> IDs = new Pila_ListaEnlazada<>();
 
                 while(currentLine != null) {
                     IDs.insertar(currentLine);
@@ -474,10 +474,11 @@ public class App {
                         System.out.println("Digite los números de identificación de los deportitas linea por linea:");
                         String blankspace = sc_Comp.nextLine();
 
-                        Cola_ListaEnlazada<String> Ids_inscribir = new Cola_ListaEnlazada<>();
+                        Pila_ListaEnlazada<String> Ids_inscribir = new Pila_ListaEnlazada<>();
 
                         for (int i = 0; i < num_deportistas_inscribir; i++) {
                             Ids_inscribir.insertar(sc_Comp.nextLine());
+                            System.out.println(Ids_inscribir.tamaño);
                         }
 
                         // Agregamos deportistas
