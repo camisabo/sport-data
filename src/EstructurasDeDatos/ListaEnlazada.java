@@ -165,14 +165,12 @@ public class ListaEnlazada <T extends Comparable<T>>{
 
         tamaño++;
 
-        if(primerNodo.getDato() == null){
-
+        if(this.primerNodo == null){
             Nodo<T> new_node = new Nodo<T>(nuevoDato);
             primerNodo = new_node;
         }
         
         else{
-            
             Nodo<T> nodoActual = primerNodo;
             Nodo<T> nuevoNodo = new Nodo<>(nuevoDato);
         

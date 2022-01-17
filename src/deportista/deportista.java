@@ -8,6 +8,8 @@ package deportista;
 import java.time.LocalDate;
 import java.time.Period;
 
+import EstructurasDeDatos.ListaEnlazada;
+
 /**
  *
  * @author Omar Nicolas Guerrero
@@ -23,7 +25,10 @@ public class deportista implements Comparable<deportista> {
     public String nivel;                                       // escuela, novatos, ligados
     public LocalDate fechaDeNacimiento;
     private LocalDate refDate = LocalDate.of(2021,6,1);         //Fecha referencia para calcular la edad y al categoría
-    
+    public ListaEnlazada<String> competencias = new ListaEnlazada<String>();
+    public ListaEnlazada<Float> tiempos = new ListaEnlazada<Float>();
+
+
     //Categoria tipo String
     public String Categoria; 
     
@@ -119,6 +124,21 @@ public class deportista implements Comparable<deportista> {
         this.Categoria = Categoria;
     }
 
+    public ListaEnlazada<String> getCompetencias(){
+        return competencias;
+    }
+
+    public void setCompetencias(ListaEnlazada<String> competencias){
+        this.competencias = competencias;
+    }
+
+    public ListaEnlazada<Float> getTiempos(){
+        return tiempos;
+    }
+
+    public void setTiempos(ListaEnlazada<Float> tiempos){
+        this.tiempos = tiempos;
+    }
 
     
     //metodos

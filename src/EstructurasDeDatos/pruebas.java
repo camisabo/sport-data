@@ -21,31 +21,22 @@ public class pruebas <T> {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
-//        ListaEnlazada lista = new ListaEnlazada(12);
-//        lista.insertar(12, 1);
-//        lista.insertar(12, 1);
+        ArbolAVL2<Integer> arbolAVL = new ArbolAVL2(4);
+        arbolAVL.insertar(8);
+        arbolAVL.insertar(9);
+        arbolAVL.insertar(10);
+        arbolAVL.insertar(1);
+        arbolAVL.insertar(3);
+        arbolAVL.insertar(6);
+        arbolAVL.insertar(2);
+        arbolAVL.preorden();
+        System.out.println(arbolAVL.buscarDato(10));
+        System.out.println(arbolAVL.buscarDato(2));
+        System.out.println(arbolAVL.buscarDato(13));        
         
-//        ArbolDeBusqueda<Integer> arbol = new ArbolDeBusqueda(5000);
-//        for (int i = 0; i < 5000; i++) {
-//            if (i%2 ==0){
-//                arbol.insertar(i);
-//            }
-//            else{
-//                arbol.insertar(10000-i);
-//            }
-//        }
-//        System.out.println(arbol.altura(arbol.raiz));
-//        arbol.eliminar(9999);
-//        
-//        if(arbol.raiz.getNodoHijoDerecha() != null)
-//            System.out.println(arbol.raiz.getNodoHijoDerecha().getDato());
-//        
-//        if(arbol.raiz.getNodoHijoIzquierda() != null)
-//            System.out.println(arbol.raiz.getNodoHijoIzquierda().getDato());
-//        
           
         
-        
+        entrada.close();
     }
     
     

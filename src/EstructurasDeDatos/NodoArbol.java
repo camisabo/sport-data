@@ -64,11 +64,8 @@ public class NodoArbol <T extends Comparable<T>> {
         return dato;
     }
     
-
     public void setDato(T dato) {
         this.dato = dato;
     }
-    
-    
     
 }
