@@ -487,7 +487,7 @@ public class App {
                             programa=false;
                             break;
                         default:
-                            break;s
+                            break;
                     }
                     break;
                 case 7: //mostrar resultados
