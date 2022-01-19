@@ -21,7 +21,7 @@ public class pruebas <T> {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
-        ArbolAVL2<Integer> arbolAVL = new ArbolAVL2(4);
+        ArbolAVL<Integer> arbolAVL = new ArbolAVL(4);
         arbolAVL.insertar(8);
         arbolAVL.insertar(9);
         arbolAVL.insertar(10);

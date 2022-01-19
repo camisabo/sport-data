@@ -1,6 +1,6 @@
 package deportista;
 
-import EstructurasDeDatos.ArbolAVL2;
+import EstructurasDeDatos.ArbolAVL;
 import EstructurasDeDatos.Cola_ListaEnlazada;
 import EstructurasDeDatos.ListaEnlazada;
 import EstructurasDeDatos.Pila_ListaEnlazada;
@@ -16,7 +16,7 @@ public class competencia implements Comparable<competencia>{
     public ListaEnlazada<deportista> deportistasInscritos = new ListaEnlazada<>();
     public String nombreCompetencia;
     public int id;
-    public ArbolAVL2<Resultado> resultadosArbol = new ArbolAVL2<>();
+    public ArbolAVL<Resultado> resultadosArbol = new ArbolAVL<>();
     public ListaEnlazada<Resultado> resultadosLista = new ListaEnlazada();
 
     public competencia(){
