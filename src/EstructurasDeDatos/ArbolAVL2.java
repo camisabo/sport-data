@@ -132,11 +132,43 @@ public class ArbolAVL2 <T extends Comparable<T>> {
     }
 
     public void eliminar(T dato){
-         
+        if (EstaVacio()== false){
+            raiz = eliminar(dato, raiz);   
+        }      
     }
 
-    public void actualizar(T datoAnterior, T datoNuevo){
-        
+    public NodoArbol<T> eliminar(T dato, NodoArbol<T> nodo){
+        if (nodo == null){
+            return null;
+        }
+        if (nodo.getDato().compareTo(dato)<0){
+            nodo.setNodoHijoDerecha(eliminar(dato, nodo.getNodoHijoDerecha()));
+        } else if (nodo.getDato().compareTo(dato)>0){
+            nodo.setNodoHijoIzquierda(eliminar(dato, nodo.getNodoHijoIzquierda()));
+        } else if (nodo.getNodoHijoDerecha()!= null && nodo.getNodoHijoIzquierda()!=null){
+            //encontramos el nodo a eliminar y tiene 2 hijos
+            NodoArbol<T> nodoMinimo = hallarMinimo(nodo.getNodoHijoDerecha());
+            nodo.setDato(nodoMinimo.getDato());
+            nodo.setNodoHijoDerecha(eliminar(nodo.getDato(), nodo.getNodoHijoDerecha()));
+        } else {
+            if (nodo.getNodoHijoDerecha()== null ){
+                nodo = nodo.getNodoHijoIzquierda();
+            } else {
+                nodo = nodo.getNodoHijoDerecha();
+            }
+        }
+        // siempre que se recorra un nodo se balancea el árbol
+        return equilibrar(nodo);
+    }
+
+    public NodoArbol<T> hallarMinimo(NodoArbol<T> nodo){
+        if (nodo == null){
+            return null;
+        } else if (nodo.getNodoHijoIzquierda()==null){
+            return nodo;
+        } else {
+            return hallarMinimo(nodo.getNodoHijoIzquierda());
+        }
     }
 
     public boolean buscarDato(T dato){

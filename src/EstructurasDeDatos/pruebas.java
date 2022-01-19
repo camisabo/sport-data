@@ -33,8 +33,9 @@ public class pruebas <T> {
         System.out.println(arbolAVL.buscarDato(10));
         System.out.println(arbolAVL.buscarDato(2));
         System.out.println(arbolAVL.buscarDato(13));        
-        
-          
+        arbolAVL.inorden();
+        arbolAVL.eliminar(8);
+        arbolAVL.preorden();
         
         entrada.close();
     }
