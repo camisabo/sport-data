@@ -6,6 +6,7 @@
 package EstructurasDeDatos;
 
 import java.util.Scanner;
+import deportista.deportista;
 
 
 /**
@@ -19,25 +20,19 @@ public class pruebas <T> {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner entrada = new Scanner(System.in);
 
-        ArbolAVL<Integer> arbolAVL = new ArbolAVL(4);
-        arbolAVL.insertar(8);
-        arbolAVL.insertar(9);
-        arbolAVL.insertar(10);
-        arbolAVL.insertar(1);
-        arbolAVL.insertar(3);
-        arbolAVL.insertar(6);
-        arbolAVL.insertar(2);
-        arbolAVL.preorden();
-        System.out.println(arbolAVL.buscarDato(10));
-        System.out.println(arbolAVL.buscarDato(2));
-        System.out.println(arbolAVL.buscarDato(13));        
-        arbolAVL.inorden();
-        arbolAVL.eliminar(8);
-        arbolAVL.preorden();
-        
-        entrada.close();
+        HashTable<deportista> test = new HashTable<>(30);
+
+        String[] data = {"1001299399", "Juan Sebastian Castro Pardo", "2002-9-23", "M", "ligados", "Racing"};
+
+        deportista dep = new deportista(data);
+
+        Entrada<deportista> nuevaEntrada = new Entrada<>(Integer.parseInt(dep.getnúmerodeidentificación()), dep);
+
+        test.insertar(nuevaEntrada);
+
+        deportista dep2 = test.find(dep.getnúmerodeidentificación());
+
     }
     
     
