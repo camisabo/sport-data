@@ -19,4 +19,20 @@ public class Resultado implements Comparable<Resultado>{
             return 1;
         }
     }
+
+    public Float getTiempo() {
+        return tiempo;
+    }
+    
+    public void setTiempo(Float tiempo) {
+        this.tiempo = tiempo;
+    }
+
+    public deportista getDeportista() {
+        return deportista;
+    }
+
+    public void setDeportista(deportista deportista) {
+        this.deportista = deportista;
+    }
 }

@@ -1,11 +1,9 @@
 package deportista;
 
 import EstructurasDeDatos.ArbolAVL;
-import EstructurasDeDatos.Cola_ListaEnlazada;
 import EstructurasDeDatos.ListaEnlazada;
 import EstructurasDeDatos.Pila_ListaEnlazada;
 import EstructurasDeDatos.*;
-import java.lang.Integer;
 import java.util.Scanner;
 
 public class competencia implements Comparable<competencia>{
@@ -15,9 +13,8 @@ public class competencia implements Comparable<competencia>{
     public Boolean competenciaAbierta = true;
     public ListaEnlazada<deportista> deportistasInscritos = new ListaEnlazada<>();
     public String nombreCompetencia;
-    public int id;
     public ArbolAVL<Resultado> resultadosArbol = new ArbolAVL<>();
-    public ListaEnlazada<Resultado> resultadosLista = new ListaEnlazada();
+    public int numeroCompetencia;
 
     public competencia(){
 
@@ -90,7 +87,6 @@ public class competencia implements Comparable<competencia>{
             Float tiempo = sc.nextFloat();
             Resultado resultado = new Resultado(deportistaResultado.getDato(), tiempo);
             resultadosArbol.insertar(resultado);
-            resultadosLista.insertar(resultado);
             deportistaResultado = deportistaResultado.NodoSiguiente;
         }
         sc.nextLine();
@@ -99,7 +95,21 @@ public class competencia implements Comparable<competencia>{
     }
 
     public void mostrarResultados(){
+        if (competenciaAbierta==false){
+            System.out.println("ID deportista       Tiempo");
+            inorden(resultadosArbol.raiz);
+        } else{
+            System.out.println("La competencia aún no termina");
+        }
         
+    }
+
+    public void inorden(NodoArbol<Resultado> nodo){
+        if (nodo != null){
+            inorden(nodo.getNodoHijoIzquierda());
+            System.out.println(nodo.getDato().getDeportista().getnúmerodeidentificación()+" "+nodo.getDato().getTiempo());
+            inorden(nodo.getNodoHijoDerecha());
+        }        
     }
     @Override
     public int compareTo(competencia c) {
@@ -110,5 +120,31 @@ public class competencia implements Comparable<competencia>{
         }
     }
     
+    public void setNumeroCompetencia(int numeroCompetencia) {
+        this.numeroCompetencia = numeroCompetencia;
+    }
+
+    public int getNumeroCompetencia() {
+        return numeroCompetencia;
+    }
     
+    public void setNombreCompetencia(String nombreCompetencia) {
+        this.nombreCompetencia = nombreCompetencia;
+    }
+
+    public String getNombreCompetencia() {
+        return nombreCompetencia;
+    }
+
+    public String actualizarTxtCompetencia () {
+        String dep_txt_str = nombreCompetencia + "\n" + deportistasInscritos.tamaño ;
+        Nodo<deportista> nodoActual = deportistasInscritos.primerNodo;
+        while (nodoActual != null){
+            deportista dep_txt = nodoActual.getDato();
+            dep_txt_str += "\n" + dep_txt.númerodeidentificación ;
+            nodoActual = nodoActual.NodoSiguiente;
+        }
+
+        return dep_txt_str;
+    }
 }

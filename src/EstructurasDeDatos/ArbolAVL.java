@@ -72,7 +72,7 @@ public class ArbolAVL <T extends Comparable<T>> {
 
     //rotación simple a la derecha
     public NodoArbol<T> rotarDerecha(NodoArbol<T> nodo){
-        NodoArbol izquierda = nodo.getNodoHijoIzquierda();
+        NodoArbol<T> izquierda = nodo.getNodoHijoIzquierda();
         nodo.setNodoHijoIzquierda(izquierda.getNodoHijoDerecha());
         izquierda.setNodoHijoDerecha(nodo);
         actualizarAltura(nodo);
@@ -82,7 +82,7 @@ public class ArbolAVL <T extends Comparable<T>> {
 
     //rotación simple a la izquierda
     public NodoArbol<T> rotarIzquierda(NodoArbol<T> nodo){
-        NodoArbol derecha = nodo.getNodoHijoDerecha();
+        NodoArbol<T> derecha = nodo.getNodoHijoDerecha();
         nodo.setNodoHijoDerecha(derecha.getNodoHijoIzquierda());
         derecha.setNodoHijoIzquierda(nodo);
         actualizarAltura(nodo);
@@ -104,7 +104,7 @@ public class ArbolAVL <T extends Comparable<T>> {
 
     public void insertar(T dato ){
         if (EstaVacio()){
-            this.raiz= new NodoArbol(dato);
+            this.raiz= new NodoArbol<T>(dato);
 
         } else {
             raiz = insertar(this.raiz, dato);

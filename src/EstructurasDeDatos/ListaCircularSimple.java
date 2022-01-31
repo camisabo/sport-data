@@ -20,7 +20,7 @@ public class ListaCircularSimple<T extends Comparable<T>> extends ListaEnlazada<
     @Override
     public void eliminar(T datoABorrar) {
         tamaño--;
-        Nodo nodoActual = primerNodo;
+        Nodo<T> nodoActual = primerNodo;
         boolean estaElDato = buscar(datoABorrar);
         if (estaElDato == false){
             System.out.println("No se encuentra "+datoABorrar+" en "+this);

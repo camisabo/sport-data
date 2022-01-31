@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package EstructurasDeDatos;
-import java.lang.Exception;
 
 /**
  *
@@ -20,7 +19,7 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
     }
 
     public ArbolDeBusqueda(T dato) {
-        raiz = new NodoArbol(dato);
+        raiz = new NodoArbol<T>(dato);
     }
     
     //metodos
@@ -62,9 +61,9 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * @return el nodo que se ingreso en los parametros para qe la recursividad 
      * funcione
      */
-    private NodoArbol insertar(NodoArbol nodoAEvaluar, T dato) throws StackOverflowError{
+    private NodoArbol<T> insertar(NodoArbol<T> nodoAEvaluar, T dato) throws StackOverflowError{
         if (nodoAEvaluar == null){
-            return new NodoArbol(dato);
+            return new NodoArbol<T>(dato);
         }
         if (nodoAEvaluar.getDato().compareTo(dato)<0){
             nodoAEvaluar.setNodoHijoDerecha(insertar(nodoAEvaluar.getNodoHijoDerecha(), dato));
@@ -110,7 +109,7 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * @param dato dato que se busca en el arbol
      * @return retorna un booleano dependiendo de si encuentra o no al dato
      */
-    private boolean buscar(NodoArbol nodoAEvaluar, T dato){
+    private boolean buscar(NodoArbol<T> nodoAEvaluar, T dato){
         if (nodoAEvaluar == null){
             return false;
         }
@@ -139,7 +138,7 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * @param nodoAEvaluar es el nodo base que se va a evaluar
      * @return el dato mas a la izquierda del nodo base
      */
-    private NodoArbol minimo(NodoArbol nodoAEvaluar){
+    private NodoArbol<T> minimo(NodoArbol<T> nodoAEvaluar){
         if(nodoAEvaluar.getNodoHijoIzquierda()==null){
             return null;
         }
@@ -167,7 +166,7 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * @param nodoAEvaluar es el nodo base que se va a evaluar
      * @return el nodo que se busca eliminar para facilitar la recurcividad
      */
-    private  NodoArbol eliminar (Comparable dato, NodoArbol nodoAEvaluar){
+    private  NodoArbol<T> eliminar (T dato, NodoArbol<T> nodoAEvaluar){
         if (nodoAEvaluar == null) {
             return nodoAEvaluar;
         }
@@ -205,7 +204,7 @@ public class ArbolDeBusqueda<T extends Comparable<T>> {
      * @param nodoAEvaluar nodo al cual se busca saber la altura
      * @return la altura del nodo a evaluar
      */
-    public int altura (NodoArbol nodoAEvaluar){
+    public int altura (NodoArbol<T> nodoAEvaluar){
         if (nodoAEvaluar == null){
             return -1;
         }

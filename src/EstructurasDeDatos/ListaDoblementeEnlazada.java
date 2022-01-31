@@ -108,7 +108,7 @@ public class ListaDoblementeEnlazada<T extends Comparable<T>> extends ListaEnlaz
     public void insertar(T nuevoDato) {
         tamaño++;
         Nodo<T> nodoActual = ultimoNodo;
-        Nodo<T> nuevoNodo = new Nodo(nuevoDato);   
+        Nodo<T> nuevoNodo = new Nodo<T>(nuevoDato);   
         
         nodoActual.setNodoSiguiente(nuevoNodo);
         nuevoNodo.setNodoAnterior(nodoActual);

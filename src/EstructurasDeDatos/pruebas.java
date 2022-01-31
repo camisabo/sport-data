@@ -5,7 +5,6 @@
  */
 package EstructurasDeDatos;
 
-import java.util.Scanner;
 import deportista.deportista;
 
 

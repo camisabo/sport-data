@@ -1,8 +1,9 @@
-63353120%pepita perez%2001-03-20%F%ligados%club
-1123432317%Maria Fernanda Castro Pardo%2005-02-19%F%novatos%Racing Skate
-1001299399%Juan Sebastian Castro Pardo%2002-09-23%M%ligados%Racing Skate
-1006875801%Danna Juliana Bello Rincon%2002-05-20%F%ligados%Semillas del Meta
-1000795707%Vanessa Lozano%2002-07-31%F%novatos%club
-1234%Juan Correa%2002-07-30%F%novatos%club
-12345%Cristopher B%1997-07-30%F%novatos%club
-123456%Bob Diaz%2007-07-31%F%novatos%club
+10008%julieta%2001-12-30%F%escuela%club
+10006%valentina%1999-02-19%F%ligados%club
+10005%mariana%2001-02-22%F%escuela%club
+10004%sofia%2001-02-22%F%escuela%club
+10003%antonio%2001-02-22%M%escuela%club
+10002%carlos%2001-02-22%M%escuela%club
+10001%juan%2001-02-22%M%escuela%club
+10000%maria%2001-02-22%F%escuela%club
+10007%mario%2001-02-12%M%ligados%club
